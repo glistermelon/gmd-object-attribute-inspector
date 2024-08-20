@@ -352,7 +352,7 @@ public:
 
 };
 
-const CCSize ATTR_LISTING_SIZE = CCSize({ 300.f, 60.f });
+const CCSize ATTR_LISTING_SIZE = CCSize(300.f, 60.f);
 
 class AttributeListing : public GenericListCell {
 
