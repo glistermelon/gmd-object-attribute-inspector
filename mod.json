@@ -1,0 +1,30 @@
+{
+	"geode": "3.2.0",
+	"gd": {
+		"win": "2.206",
+		"android": "2.206",
+		"mac": "2.206",
+		"ios": "2.206"
+	},
+	"id": "glistermelon.object_attribute_viewer",
+	"name": "Object Attribute Viewer",
+	"version": "v1.0.0",
+	"developer": "glistermelon",
+	"description": "View low-level attributes of objects (as in level save strings).",
+    "dependencies": [
+        {
+            "id": "geode.custom-keybinds",
+            "version": "v1.1.0"
+        }
+    ],
+	"resources": {
+		"sprites": [
+			"resources/trash.png",
+			"resources/pencil.png",
+			"resources/checkmark.png"
+		],
+		"files": [
+			"resources/docs.json"
+		]
+	}
+}

@@ -1,0 +1,2357 @@
+{
+    "1": {
+        "name": "Object ID",
+        "type": "int",
+        "desc": "the ID of the object"
+    },
+    "2": {
+        "name": "X Position",
+        "type": "float",
+        "desc": "the X position of the object"
+    },
+    "3": {
+        "name": "Y Position",
+        "type": "float",
+        "desc": "the Y position of the object"
+    },
+    "4": {
+        "name": "Flipped Horizontally",
+        "type": "bool",
+        "desc": "whether the object is horizontally flipped"
+    },
+    "5": {
+        "name": "Flipped Vertically",
+        "type": "bool",
+        "desc": "whether the object is vertically flipped"
+    },
+    "6": {
+        "name": "Rotation",
+        "type": "float",
+        "desc": "the rotation of the objects in degrees, CW is positive, top is 0"
+    },
+    "7": {
+        "name": "Red",
+        "type": "int",
+        "desc": "the Red component of the color in a trigger"
+    },
+    "8": {
+        "name": "Green",
+        "type": "int",
+        "desc": "the Green component of the color in a trigger"
+    },
+    "9": {
+        "name": "Blue",
+        "type": "int",
+        "desc": "the Blue component of the color in a trigger"
+    },
+    "10": {
+        "name": "Duration / Chance",
+        "type": "float",
+        "desc": "the duration of an effect in a trigger or the chance in a Random trigger"
+    },
+    "11": {
+        "name": "Touch Triggered",
+        "type": "bool",
+        "desc": "the Touch Triggered property of a trigger"
+    },
+    "12": {
+        "name": "Secret Coin ID",
+        "type": "int",
+        "desc": "the ID of a Secret Coin"
+    },
+    "13": {
+        "name": "Special Object Checked",
+        "type": "bool",
+        "desc": "the checked property of some special objects (gamemode, speed, dual portals, etc.) (handles \"Preview\" property of orbs and pads)"
+    },
+    "14": {
+        "name": "Tint Ground",
+        "type": "bool",
+        "desc": "the Tint Ground property of the BG Color trigger"
+    },
+    "15": {
+        "name": "Player Color 1",
+        "type": "bool",
+        "desc": "the Player Color 1 property of any Color trigger"
+    },
+    "16": {
+        "name": "Player Color 2",
+        "type": "bool",
+        "desc": "the Player Color 2 property of any Color trigger"
+    },
+    "17": {
+        "name": "Blending",
+        "type": "bool",
+        "desc": "the Blending property of any Color trigger"
+    },
+    "19": {
+        "name": "1.9 Color Channel ID",
+        "type": "int",
+        "desc": "the legacy Color Channel ID property used in 1.9 levels. If set to a valid value, both the Main and Secondary Color Channel ID properties will be ignored."
+    },
+    "20": {
+        "name": "Editor Layer 1",
+        "type": "int",
+        "desc": "the Editor Layer 1 property of the object"
+    },
+    "21": {
+        "name": "Main Color Channel ID",
+        "type": "int",
+        "desc": "the Main Color Channel ID property of the object"
+    },
+    "22": {
+        "name": "Secondary Color Channel ID",
+        "type": "int",
+        "desc": "the Secondary Color Channel ID property of the object"
+    },
+    "23": {
+        "name": "Target Color ID",
+        "type": "int",
+        "desc": "the Target Color ID property in an interactive object"
+    },
+    "24": {
+        "name": "Z Layer",
+        "type": "int",
+        "desc": "the Z Layer of the object"
+    },
+    "25": {
+        "name": "Z Order",
+        "type": "int",
+        "desc": "the Z Order of the object"
+    },
+    "28": {
+        "name": "Offset X",
+        "type": "int",
+        "desc": "the Offset X property of the Move or camera triggers"
+    },
+    "29": {
+        "name": "Offset Y",
+        "type": "int",
+        "desc": "the Offset Y property of the Move or camera triggers"
+    },
+    "30": {
+        "name": "Easing",
+        "type": "int",
+        "desc": "the Easing type of the effect of a trigger"
+    },
+    "31": {
+        "name": "Text",
+        "type": "str",
+        "desc": "the text of the text object in [base64]()"
+    },
+    "32": {
+        "name": "Scaling",
+        "type": "float",
+        "desc": "the scaling of the object"
+    },
+    "33": {
+        "name": "Single Group ID",
+        "type": "int",
+        "desc": "a group ID given to the object"
+    },
+    "34": {
+        "name": "Group Parent",
+        "type": "bool",
+        "desc": "the Group Parent property of the object"
+    },
+    "35": {
+        "name": "Opacity",
+        "type": "float",
+        "desc": "the opacity value of a trigger"
+    },
+    "41": {
+        "name": "Main Color HSV Enabled",
+        "type": "bool",
+        "desc": "whether the HSV mode is enabled for the Main Color of the object"
+    },
+    "42": {
+        "name": "Secondary Color HSV Enabled",
+        "type": "bool",
+        "desc": "whether the HSV mode is enabled for the Secondary Color of the object"
+    },
+    "43": {
+        "name": "Main Color HSV",
+        "type": "color",
+        "desc": "the HSV adjustment values of the Main Color of the object"
+    },
+    "44": {
+        "name": "Secondary Color HSV",
+        "type": "color",
+        "desc": "the HSV adjustment values of the Secondary Color of the object"
+    },
+    "45": {
+        "name": "Fade In",
+        "type": "float",
+        "desc": "the Fade In property of the Pulse trigger"
+    },
+    "46": {
+        "name": "Hold",
+        "type": "float",
+        "desc": "the Hold property of the Pulse trigger"
+    },
+    "47": {
+        "name": "Fade Out",
+        "type": "float",
+        "desc": "the Fade Out property of the Pulse trigger"
+    },
+    "48": {
+        "name": "Pulse Mode",
+        "type": "int",
+        "desc": "the Pulse Mode property of the Pulse trigger"
+    },
+    "49": {
+        "name": "Copied Color HSV",
+        "type": "color",
+        "desc": "the HSV adjustment values of the Copied Color property of a trigger"
+    },
+    "50": {
+        "name": "Copied Color ID",
+        "type": "int",
+        "desc": "the Copied Color Channel ID in a trigger"
+    },
+    "51": {
+        "name": "Target Group ID",
+        "type": "int",
+        "desc": "the Target Group ID in a trigger"
+    },
+    "52": {
+        "name": "Pulse Target Type",
+        "type": "int",
+        "desc": "the Target Type property of the Pulse trigger"
+    },
+    "54": {
+        "name": "Yellow Teleportation Portal Y Offset",
+        "type": "float",
+        "desc": "the Y offset of the yellow from the blue teleportation portal"
+    },
+    "55": {
+        "name": "Teleport Portal Ease",
+        "type": "bool",
+        "desc": "The Smooth Ease property within Teleport Portals/Orbs"
+    },
+    "56": {
+        "name": "Activate Group",
+        "type": "bool",
+        "desc": "the Activate Group property of the trigger"
+    },
+    "57": {
+        "name": "Group IDs",
+        "type": "array",
+        "desc": "the group IDs of the object"
+    },
+    "58": {
+        "name": "Lock To Player X",
+        "type": "bool",
+        "desc": "the Lock To Player X property of the Move trigger, or the Don't Zoom X property of the Gameplay Offset trigger"
+    },
+    "59": {
+        "name": "Lock To Player Y",
+        "type": "bool",
+        "desc": "the Lock To Player Y property of the Move trigger, or the Don't Zoom Y property of the Gameplay Offset trigger"
+    },
+    "60": {
+        "name": "Copy Opacity",
+        "type": "bool",
+        "desc": "the Copy Opacity property of a trigger"
+    },
+    "61": {
+        "name": "Editor Layer 2",
+        "type": "int",
+        "desc": "the Editor Layer 2 of an object"
+    },
+    "62": {
+        "name": "Spawn Triggered",
+        "type": "bool",
+        "desc": "the Spawn Triggered property of a trigger"
+    },
+    "63": {
+        "name": "Spawn Delay",
+        "type": "float",
+        "desc": "the Spawn Delay property of the Spawn trigger"
+    },
+    "64": {
+        "name": "Don't Fade",
+        "type": "bool",
+        "desc": "the Don't Fade property of the object"
+    },
+    "65": {
+        "name": "Main Only",
+        "type": "bool",
+        "desc": "the Main Only property of the Pulse and Area Tint triggers"
+    },
+    "66": {
+        "name": "Detail Only",
+        "type": "bool",
+        "desc": "the Detail Only property of the Pulse and Area Tint triggers"
+    },
+    "67": {
+        "name": "Don't Enter",
+        "type": "bool",
+        "desc": "the Don't Enter property of the object"
+    },
+    "68": {
+        "name": "Degrees",
+        "type": "int",
+        "desc": "the Degrees property of a rotational trigger"
+    },
+    "69": {
+        "name": "Times 360",
+        "type": "int",
+        "desc": "the Times 360 property of the Rotate trigger"
+    },
+    "70": {
+        "name": "Lock Object Rotation",
+        "type": "bool",
+        "desc": "the Lock Object Rotation property of the Rotate trigger, or the Add property of the Rotate camera trigger"
+    },
+    "71": {
+        "name": "Secondary Group ID",
+        "type": "int",
+        "desc": "the Secondary (Follow, Target Pos, Center) Group ID property of some triggers"
+    },
+    "72": {
+        "name": "X Mod",
+        "type": "float",
+        "desc": "the X Mod property of the Follow trigger"
+    },
+    "73": {
+        "name": "Y Mod",
+        "type": "float",
+        "desc": "the Y Mod property of the Follow trigger"
+    },
+    "75": {
+        "name": "Strength",
+        "type": "float",
+        "desc": "the Strength property of the Shake trigger"
+    },
+    "76": {
+        "name": "Animation ID",
+        "type": "int",
+        "desc": "the Animation ID property of the Animate trigger"
+    },
+    "77": {
+        "name": "Count",
+        "type": "int",
+        "desc": "the Count property of the Pickup trigger or the Pickup Item"
+    },
+    "78": {
+        "name": "Subtract Count",
+        "type": "bool",
+        "desc": "the Subtract Count property of the Pickup trigger or the Pickup Item"
+    },
+    "79": {
+        "name": "Pickup Mode",
+        "type": "int",
+        "desc": "the Pickup Mode property of the Pickup Item"
+    },
+    "80": {
+        "name": "Item/Block ID",
+        "type": "int",
+        "desc": "the Item/Block ID property of an object"
+    },
+    "81": {
+        "name": "Hold Mode",
+        "type": "bool",
+        "desc": "the Hold Mode property of the Touch trigger"
+    },
+    "82": {
+        "name": "Toggle Mode",
+        "type": "int",
+        "desc": "the Toggle Mode property of the Touch trigger"
+    },
+    "84": {
+        "name": "Interval",
+        "type": "float",
+        "desc": "the Interval property of the Shake trigger"
+    },
+    "85": {
+        "name": "Easing Rate",
+        "type": "float",
+        "desc": "the Easing Rate property of a trigger"
+    },
+    "86": {
+        "name": "Exclusive",
+        "type": "bool",
+        "desc": "the Exclusive property of a Pulse trigger"
+    },
+    "87": {
+        "name": "Multi-Trigger",
+        "type": "bool",
+        "desc": "the Multi-Trigger property of a trigger"
+    },
+    "88": {
+        "name": "Comparison / Pickup Multiply",
+        "type": "int",
+        "desc": "the Comparison property of the Instant Count trigger / the Multiply/Divide property of the Pickup trigger (1=multiply,2=divide)"
+    },
+    "89": {
+        "name": "Dual Mode",
+        "type": "bool",
+        "desc": "the Dual Mode property of the Touch trigger"
+    },
+    "90": {
+        "name": "Speed",
+        "type": "float",
+        "desc": "the Speed property of the Follow Player Y trigger"
+    },
+    "91": {
+        "name": "Follow Delay",
+        "type": "float",
+        "desc": "the Follow Delay property of the Follow Player Y trigger"
+    },
+    "92": {
+        "name": "Y Offset",
+        "type": "float",
+        "desc": "the Y Offset property of the Follow Player Y trigger"
+    },
+    "93": {
+        "name": "Trigger On Exit",
+        "type": "bool",
+        "desc": "the Trigger On Exit property of the Collision trigger"
+    },
+    "94": {
+        "name": "Dynamic Block",
+        "type": "bool",
+        "desc": "the Dynamic Block property of the Collision block"
+    },
+    "95": {
+        "name": "Block B ID / Item 2 ID",
+        "type": "int",
+        "desc": "the Block B ID property of the Collision trigger or the \"ItemID2\" property of the Item Compare trigger"
+    },
+    "96": {
+        "name": "No Glow",
+        "type": "bool",
+        "desc": "the No Glow property of the object"
+    },
+    "97": {
+        "name": "Custom Rotation Speed",
+        "type": "float",
+        "desc": "the Custom Rotation Speed property of the rotating object in degrees per second"
+    },
+    "98": {
+        "name": "Disable Rotation",
+        "type": "bool",
+        "desc": "the Disable Rotation property of the rotating object"
+    },
+    "99": {
+        "name": "Multi Activate (Orbs and Pads)",
+        "type": "bool",
+        "desc": "the Multi Activate property of Orbs and Pads, and the Toggle Block"
+    },
+    "100": {
+        "name": "Target/Aim Mode",
+        "type": "bool",
+        "desc": "the Target Mode property of the Move trigger; the Aim Mode property of the Rotate trigger"
+    },
+    "101": {
+        "name": "Target Pos Coordinates",
+        "type": "int",
+        "desc": "the Target Pos Coordinates property of the Move or camera triggers"
+    },
+    "102": {
+        "name": "Preview Disable",
+        "type": "bool",
+        "desc": "the Preview Disable property of the Spawn trigger"
+    },
+    "103": {
+        "name": "High Detail",
+        "type": "bool",
+        "desc": "the High Detail property of the object"
+    },
+    "104": {
+        "name": "Multi Activate (Triggers)",
+        "type": "bool",
+        "desc": "The Multi Activate Property of Triggers"
+    },
+    "105": {
+        "name": "Max Speed",
+        "type": "float",
+        "desc": "the Max Speed property of the Follow Player Y trigger"
+    },
+    "106": {
+        "name": "Randomize Start",
+        "type": "bool",
+        "desc": "the Randomize Start property of the animated object"
+    },
+    "107": {
+        "name": "Animation Speed",
+        "type": "float",
+        "desc": "the Animation Speed property of the animated object"
+    },
+    "108": {
+        "name": "Linked Group ID",
+        "type": "int",
+        "desc": "the Linked Group ID property of the object"
+    },
+    "110": {
+        "name": "Exit Static",
+        "type": "bool",
+        "desc": "camera static trigger"
+    },
+    "111": {
+        "name": "Free Mode",
+        "type": "bool",
+        "desc": "camera mode trigger"
+    },
+    "112": {
+        "name": "Edit Camera Settings",
+        "type": "bool",
+        "desc": "camera mode trigger"
+    },
+    "113": {
+        "name": "Camera Mode Easing",
+        "type": "int",
+        "desc": "camera mode trigger"
+    },
+    "114": {
+        "name": "Camera Padding",
+        "type": "float",
+        "desc": "camera mode trigger"
+    },
+    "115": {
+        "name": "Order",
+        "type": "int",
+        "desc": null
+    },
+    "116": {
+        "name": "No Effects",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "117": {
+        "name": "Reverse",
+        "type": "bool",
+        "desc": "orbs and pads, but not dash orbs"
+    },
+    "120": {
+        "name": "Time Modifier",
+        "type": "float",
+        "desc": "timewarp trigger"
+    },
+    "121": {
+        "name": "No Touch",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "122": {
+        "name": "Animation Use Speed",
+        "type": "bool",
+        "desc": "animation"
+    },
+    "123": {
+        "name": "Animate on Trigger",
+        "type": "bool",
+        "desc": "animation"
+    },
+    "126": {
+        "name": "Animation Disable Delayed Loop",
+        "type": "bool",
+        "desc": "animation"
+    },
+    "127": {
+        "name": "Disable Animation Shine",
+        "type": "bool",
+        "desc": "animation"
+    },
+    "128": {
+        "name": "Scale X",
+        "type": "float",
+        "desc": "scale X property of an object"
+    },
+    "129": {
+        "name": "Scale Y",
+        "type": "float",
+        "desc": "scale Y property of an object"
+    },
+    "131": {
+        "name": "Shear X",
+        "type": "float",
+        "desc": "Always present if Shear Y is present."
+    },
+    "132": {
+        "name": "Shear Y",
+        "type": "float",
+        "desc": "Always present if Shear X is present."
+    },
+    "133": {
+        "name": "Only Move",
+        "type": "bool",
+        "desc": "scale trigger"
+    },
+    "134": {
+        "name": "Passable",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "135": {
+        "name": "Hide",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "136": {
+        "name": "Non Stick X",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "137": {
+        "name": "Ice Block",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "138": {
+        "name": "Player Pos / P1",
+        "type": "bool",
+        "desc": "checkpoint / more..."
+    },
+    "139": {
+        "name": "Pickup Override",
+        "type": "bool",
+        "desc": "pickup trigger"
+    },
+    "141": {
+        "name": "Move Lock X to Camera",
+        "type": "bool",
+        "desc": "move trigger"
+    },
+    "142": {
+        "name": "Move Lock Y to Camera",
+        "type": "bool",
+        "desc": "move trigger"
+    },
+    "143": {
+        "name": "Move Mod X",
+        "type": "float",
+        "desc": "move trigger, bg/mg speed trigger"
+    },
+    "144": {
+        "name": "Move Mod Y",
+        "type": "float",
+        "desc": "move trigger, bg/mg speed trigger"
+    },
+    "148": {
+        "name": "Gravity",
+        "type": "float",
+        "desc": "gravity trigger"
+    },
+    "149": {
+        "name": "Force",
+        "type": "float",
+        "desc": "The Force property of a Force Block"
+    },
+    "150": {
+        "name": "Scale X",
+        "type": "float",
+        "desc": "scale trigger"
+    },
+    "151": {
+        "name": "Scale Y",
+        "type": "float",
+        "desc": "scale trigger"
+    },
+    "152": {
+        "name": "Advanced Random Trigger Data",
+        "type": "array",
+        "desc": "advanced random trigger, groupId.chance.groupId.chance... etc."
+    },
+    "153": {
+        "name": "Divide by Value X",
+        "type": "bool",
+        "desc": "scale trigger"
+    },
+    "154": {
+        "name": "Divide by Value Y",
+        "type": "bool",
+        "desc": "scale trigger"
+    },
+    "159": {
+        "name": "Additive Streak",
+        "type": "int",
+        "desc": "options trigger"
+    },
+    "160": {
+        "name": "Unlink Dual Gravity",
+        "type": "int",
+        "desc": "options trigger"
+    },
+    "161": {
+        "name": "Hide Ground",
+        "type": "int",
+        "desc": "options trigger"
+    },
+    "162": {
+        "name": "Hide P1",
+        "type": "int",
+        "desc": "options trigger"
+    },
+    "163": {
+        "name": "Hide P2",
+        "type": "int",
+        "desc": "options trigger"
+    },
+    "164": {
+        "name": "Camera Edge",
+        "type": "int",
+        "desc": "camera edge trigger; 1 = left, 2 = right, 3 = up, 4 = down"
+    },
+    "165": {
+        "name": "Disable P1 Controls",
+        "type": "bool",
+        "desc": "options trigger"
+    },
+    "169": {
+        "name": "Edit Velocity",
+        "type": "bool",
+        "desc": "rotate gameplay trigger"
+    },
+    "170": {
+        "name": "Channel",
+        "type": "int",
+        "desc": ""
+    },
+    "171": {
+        "name": "Change Channel",
+        "type": "bool",
+        "desc": "rotate gameplay trigger"
+    },
+    "172": {
+        "name": "Channel Only",
+        "type": "bool",
+        "desc": "rotate gameplay trigger"
+    },
+    "173": {
+        "name": "Target Channel",
+        "type": "int",
+        "desc": "rotate gameplay trigger"
+    },
+    "175": {
+        "name": "Shader Speed",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "176": {
+        "name": "Shader Strength",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "177": {
+        "name": "Shader Time Offset",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "179": {
+        "name": "Wave Line Width",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "180": {
+        "name": "Shader Thickness",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "181": {
+        "name": "Shader Fade In",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "182": {
+        "name": "Shader Fade Out",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "183": {
+        "name": "Inner Shockwave Size",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "184": {
+        "name": "Shader Invert",
+        "type": "bool",
+        "desc": "shader triggers"
+    },
+    "188": {
+        "name": "No Player Particles",
+        "type": "bool",
+        "desc": "shader triggers"
+    },
+    "191": {
+        "name": "Outer Shockwave Size",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "192": {
+        "name": "Disable All Shaders",
+        "type": "bool",
+        "desc": "shader triggers"
+    },
+    "193": {
+        "name": "Grip Slope",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "195": {
+        "name": "Hide Middleground",
+        "type": "bool",
+        "desc": "options trigger"
+    },
+    "196": {
+        "name": "Layer Range Start",
+        "type": "int",
+        "desc": "shader triggers (unset = 550084152)"
+    },
+    "197": {
+        "name": "Layer Range End",
+        "type": "int",
+        "desc": "shader triggers (unset = 550087896)"
+    },
+    "198": {
+        "name": "Touch P1/P2 Only",
+        "type": "int",
+        "desc": "touch trigger; 0 = neither, 1 = P1, 2 = P2"
+    },
+    "199": {
+        "name": "Disable P2 Controls",
+        "type": "bool",
+        "desc": "options trigger"
+    },
+    "200": {
+        "name": "(Target/Direction/Aim) P2",
+        "type": "bool",
+        "desc": "move trigger / rotate trigger / more..."
+    },
+    "201": {
+        "name": "Follow Center / PP / PT",
+        "type": "bool",
+        "desc": "(re-target) advanced follow trigger (\"C\") / (instant) collision trigger (\"PP\") / gravity trigger (\"PT\")"
+    },
+    "210": {
+        "name": "Disable Legacy/Static HSV",
+        "type": "bool",
+        "desc": "color & pulse triggers"
+    },
+    "212": {
+        "name": "Static Follow",
+        "type": "bool",
+        "desc": "camera static trigger"
+    },
+    "213": {
+        "name": "Static Camera Easing",
+        "type": "float",
+        "desc": "camera static trigger"
+    },
+    "214": {
+        "name": "Animation Only if Active",
+        "type": "bool",
+        "desc": "animation"
+    },
+    "218": {
+        "name": "Area Move Distance",
+        "type": "int",
+        "desc": "(edit) area move trigger"
+    },
+    "219": {
+        "name": "Area Move Distance Variance",
+        "type": "int",
+        "desc": "(edit) area move trigger"
+    },
+    "220": {
+        "name": "Area Move Offset",
+        "type": "int",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "221": {
+        "name": "Area Move Offset Variance",
+        "type": "int",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "222": {
+        "name": "Area Move Length",
+        "type": "int",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "223": {
+        "name": "Area Move Length Variance",
+        "type": "int",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "225": {
+        "name": "Area Move Effect ID",
+        "type": "int",
+        "desc": "area move/rotate/scale/fade/tint trigger"
+    },
+    "231": {
+        "name": "Area Move Angle",
+        "type": "int",
+        "desc": "(edit) area move trigger"
+    },
+    "232": {
+        "name": "Area Move Angle Variance",
+        "type": "int",
+        "desc": "(edit) area move trigger"
+    },
+    "233": {
+        "name": "Area Scale X",
+        "type": "float",
+        "desc": "(edit) area scale trigger; -99 for edit area move trigger"
+    },
+    "234": {
+        "name": "Area Scale X Variance",
+        "type": "float",
+        "desc": "(edit) area scale trigger; -99 for edit area move trigger"
+    },
+    "235": {
+        "name": "Area Scale Y",
+        "type": "float",
+        "desc": "(edit) area scale trigger; -99 for edit area move trigger"
+    },
+    "236": {
+        "name": "Area Scale Y Variance",
+        "type": "float",
+        "desc": "(edit) area scale trigger; -99 for edit area move trigger"
+    },
+    "237": {
+        "name": "Area Move X",
+        "type": "int",
+        "desc": "(edit) area move trigger; -99 for edit area move trigger"
+    },
+    "238": {
+        "name": "Area Move X Variance",
+        "type": "int",
+        "desc": "(edit) area move trigger; -99 for edit area move trigger"
+    },
+    "239": {
+        "name": "Area Move Y",
+        "type": "int",
+        "desc": "(edit) area move trigger; -99 for edit area move trigger"
+    },
+    "240": {
+        "name": "Area Move Y Variance",
+        "type": "int",
+        "desc": "(edit) area move trigger; -99 for edit area move trigger"
+    },
+    "241": {
+        "name": "XY Mode Enabled",
+        "type": "bool",
+        "desc": "(edit) area move trigger"
+    },
+    "248": {
+        "name": "Outward Easing",
+        "type": "int",
+        "desc": "area move trigger"
+    },
+    "252": {
+        "name": "Area Move Offset Y",
+        "type": "int",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "253": {
+        "name": "Area Move Offset Y Variance",
+        "type": "int",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "260": {
+        "name": "Area Tint Color Channel",
+        "type": "int",
+        "desc": "area tint trigger"
+    },
+    "261": {
+        "name": "Enable Ease Out",
+        "type": "bool",
+        "desc": "area move trigger"
+    },
+    "262": {
+        "name": "Area Move Direction",
+        "type": "int",
+        "desc": "area move/rotate/scale/fade/tint trigger; THIS IS AN ENUM! 1, 2; AREA MOVE NOTES"
+    },
+    "263": {
+        "name": "Area Move Mod Front",
+        "type": "float",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "264": {
+        "name": "Area Move Mod Back",
+        "type": "float",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "265": {
+        "name": "Area Tint",
+        "type": "float",
+        "desc": "(edit) area tint trigger; -99 for edit area move trigger"
+    },
+    "270": {
+        "name": "Area Rotation",
+        "type": "float",
+        "desc": "(edit) area rotate trigger; -99 for edit area move trigger"
+    },
+    "271": {
+        "name": "Area Rotation Variance",
+        "type": "float",
+        "desc": "(edit) area rotate trigger; -99 for edit area move trigger"
+    },
+    "275": {
+        "name": "Area Fade To Opacity",
+        "type": "float",
+        "desc": "(edit) area fade trigger; -99 for edit area move trigger"
+    },
+    "276": {
+        "name": "Area Move Mode Discriminator",
+        "type": "bool",
+        "desc": "area move/rotate/scale/fade/tint trigger; AREA MOVE NOTES"
+    },
+    "278": {
+        "name": "Area Tint Use HSV",
+        "type": "bool",
+        "desc": "(edit) area tint trigger"
+    },
+    "279": {
+        "name": "Area Parent",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "280": {
+        "name": "Ignore Group Parent",
+        "type": "bool",
+        "desc": "area move/rotate/scale/fade/tint trigger"
+    },
+    "281": {
+        "name": "Ignore Linked",
+        "type": "bool",
+        "desc": "area move/rotate/scale/fade/tint trigger"
+    },
+    "282": {
+        "name": "Area Move Deadzone",
+        "type": "float",
+        "desc": "(edit) area move/rotate/scale/fade/tint trigger"
+    },
+    "283": {
+        "name": "Area Move Bidirectionally",
+        "type": "bool",
+        "desc": "area move/rotate/scale/fade/tint trigger; AREA MOVE NOTES"
+    },
+    "284": {
+        "name": "Single P-Touch",
+        "type": "bool",
+        "desc": "orbs and pads"
+    },
+    "286": {
+        "name": "Area Fade From Opacity",
+        "type": "float",
+        "desc": "area fade trigger; -99 for edit area move trigger"
+    },
+    "287": {
+        "name": "Area Move Relative",
+        "type": "bool",
+        "desc": "area move trigger"
+    },
+    "288": {
+        "name": "Area Move Relative Fade",
+        "type": "float",
+        "desc": "(edit) area move trigger"
+    },
+    "289": {
+        "name": "Non Stick Y",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "290": {
+        "name": "Shader Screen Offset X",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "291": {
+        "name": "Shader Screen Offset Y",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "292": {
+        "name": "Follow Delay",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "293": {
+        "name": "Follow Delay Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "298": {
+        "name": "Follow Max Speed",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "299": {
+        "name": "Follow Max Speed Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "300": {
+        "name": "Follow Start Speed",
+        "type": "float",
+        "desc": "(edit) advanced follow trigger"
+    },
+    "301": {
+        "name": "Follow Start Speed Variance",
+        "type": "float",
+        "desc": "(edit) advanced follow trigger"
+    },
+    "305": {
+        "name": "Follow Target Direction",
+        "type": "bool",
+        "desc": "advanced follow trigger"
+    },
+    "306": {
+        "name": "Follow X Only",
+        "type": "bool",
+        "desc": "(edit) advanced follow trigger"
+    },
+    "307": {
+        "name": "Follow Y Only",
+        "type": "bool",
+        "desc": "(edit) advanced follow trigger"
+    },
+    "308": {
+        "name": "Follow Max Range",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "309": {
+        "name": "Follow Max Range Variance",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "316": {
+        "name": "Follow Steer Force",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "317": {
+        "name": "Follow Steer Force Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "318": {
+        "name": "Follow Steer Force Low",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "319": {
+        "name": "Follow Steer Force Low Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "320": {
+        "name": "Follow Steer Force High",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "321": {
+        "name": "Follow Steer Force High Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "322": {
+        "name": "Follow Speed Range Low",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "323": {
+        "name": "Follow Speed Range Low Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "324": {
+        "name": "Follow Speed Range High",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "325": {
+        "name": "Follow Speed Range High Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "328": {
+        "name": "Follow Break Angle",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "329": {
+        "name": "Follow Break Angle Variance",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "330": {
+        "name": "Follow Break Steer Force",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "331": {
+        "name": "Follow Break Steer Force Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "332": {
+        "name": "Follow Break Steer Speed Limit",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "333": {
+        "name": "Follow Break Steer Speed Limit Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "334": {
+        "name": "Follow Acceleration",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "335": {
+        "name": "Follow Acceleration Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "336": {
+        "name": "Ignore Disabled",
+        "type": "bool",
+        "desc": "advanced follow trigger"
+    },
+    "337": {
+        "name": "Enable Low Speed Mode",
+        "type": "bool",
+        "desc": "advanced follow trigger"
+    },
+    "338": {
+        "name": "Enable High Speed Mode",
+        "type": "bool",
+        "desc": "advanced follow trigger"
+    },
+    "339": {
+        "name": "Follow Rotate Directional",
+        "type": "bool",
+        "desc": "advanced follow trigger"
+    },
+    "340": {
+        "name": "Follow Rotation Offset",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "341": {
+        "name": "Area Move Priority",
+        "type": "int",
+        "desc": "area move/rotate/scale/fade/tint trigger"
+    },
+    "343": {
+        "name": "Enter Channel",
+        "type": "int",
+        "desc": "Extra2"
+    },
+    "345": {
+        "name": "Static Rotate Force",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "346": {
+        "name": "Rotate Force",
+        "type": "float",
+        "desc": "teleport"
+    },
+    "347": {
+        "name": "Redirect Rotate Force",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "348": {
+        "name": "Redirect Rotate Force Minimum",
+        "type": "float",
+        "desc": "teleport"
+    },
+    "349": {
+        "name": "Redirect Rotate Force Maximum",
+        "type": "float",
+        "desc": "teleport"
+    },
+    "350": {
+        "name": "Redirect Rotate Force Mod",
+        "type": "float",
+        "desc": "teleport"
+    },
+    "351": {
+        "name": "Save Offset",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "352": {
+        "name": "Ignore X",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "353": {
+        "name": "Ignore Y",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "354": {
+        "name": "Teleport Gravity",
+        "type": "int",
+        "desc": "The gravity setting of the teleport portals/orbs (1 = Normal, 2 = Flipped, 3 = Toggle)"
+    },
+    "355": {
+        "name": "Use Effect ID",
+        "type": "bool",
+        "desc": "edit area move trigger"
+    },
+    "357": {
+        "name": "Follow Near Acceleration",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "358": {
+        "name": "Follow Near Acceleration Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "359": {
+        "name": "Follow Near/Slow Distance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "360": {
+        "name": "Follow Near/Slow Distance Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "361": {
+        "name": "Follow Easing",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "362": {
+        "name": "Follow Easing Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "356": {
+        "name": "Scale Stick",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "363": {
+        "name": "Follow Rotate Easing",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "364": {
+        "name": "Follow Rotate Deadzone",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "365": {
+        "name": "Follow Priority",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "366": {
+        "name": "Follow Max Range Extra Option",
+        "type": "int",
+        "desc": "advanced follow trigger"
+    },
+    "368": {
+        "name": "Instant Offset",
+        "type": "bool",
+        "desc": "gameplay rotate trigger"
+    },
+    "369": {
+        "name": "Center Effect",
+        "type": "bool",
+        "desc": "orbs and pads"
+    },
+    "370": {
+        "name": "Disable Grid Snap",
+        "type": "bool",
+        "desc": "camera mode trigger"
+    },
+    "371": {
+        "name": "Zoom Factor",
+        "type": "float",
+        "desc": "camera zoom/guide triggers"
+    },
+    "372": {
+        "name": "No Scale Audio",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "375": {
+        "name": "Keyframe Reference Only",
+        "type": "bool",
+        "desc": "keyframe trigger"
+    },
+    "376": {
+        "name": "Close Loop",
+        "type": "bool",
+        "desc": "keyframe trigger"
+    },
+    "377": {
+        "name": "Keyframe Proximity",
+        "type": "bool",
+        "desc": "keyframe trigger"
+    },
+    "378": {
+        "name": "Keyframe Curve",
+        "type": "bool",
+        "desc": "keyframe trigger"
+    },
+    "379": {
+        "name": "Keyframe Trigger Mode",
+        "type": "int",
+        "desc": "keyframe trigger; 0 = time, 1 = even, 2 = dist"
+    },
+    "380": {
+        "name": "Preview Art",
+        "type": "bool",
+        "desc": "keyframe trigger"
+    },
+    "381": {
+        "name": "Pickup Item",
+        "type": "bool",
+        "desc": "pickup item"
+    },
+    "382": {
+        "name": "Pickup Item Toggle Trigger",
+        "type": "bool",
+        "desc": "pickup item"
+    },
+    "383": {
+        "name": "Pickup Item Points",
+        "type": "int",
+        "desc": "pickup item"
+    },
+    "385": {
+        "name": "UI X Reference",
+        "type": "int",
+        "desc": "ui trigger; 0"
+    },
+    "386": {
+        "name": "UI Y Reference",
+        "type": "int",
+        "desc": "ui trigger; 0"
+    },
+    "387": {
+        "name": "UI X Relative",
+        "type": "bool",
+        "desc": "ui trigger"
+    },
+    "388": {
+        "name": "UI Y Relative",
+        "type": "bool",
+        "desc": "ui trigger"
+    },
+    "389": {
+        "name": "Counter Seconds Only",
+        "type": "bool",
+        "desc": "counter"
+    },
+    "390": {
+        "name": "Special Counter Mode",
+        "type": "int",
+        "desc": "counter; 0 = none, -1 = maintime, -2 = points, -3 = attempts"
+    },
+    "391": {
+        "name": "Counter Alignment",
+        "type": "int",
+        "desc": "counter; 0 = none, 1 = left, 2 = right"
+    },
+    "392": {
+        "name": "Soundtrack ID",
+        "type": "int",
+        "desc": "song trigger, sfx trigger"
+    },
+    "393": {
+        "name": "Small Step",
+        "type": "bool",
+        "desc": "move trigger"
+    },
+    "394": {
+        "name": "Direction/Follow Mode/Snap360",
+        "type": "bool",
+        "desc": "move & rotate triggers + camera rotate trigger"
+    },
+    "395": {
+        "name": "Center Group ID",
+        "type": "int",
+        "desc": "move trigger"
+    },
+    "396": {
+        "name": "Directional Distance",
+        "type": "int",
+        "desc": "move trigger"
+    },
+    "397": {
+        "name": "Dynamic Mode",
+        "type": "bool",
+        "desc": "move & rotate triggers"
+    },
+    "399": {
+        "name": "Prep Song",
+        "type": "bool",
+        "desc": "song trigger"
+    },
+    "400": {
+        "name": "Load Prep Song",
+        "type": "bool",
+        "desc": "song trigger"
+    },
+    "401": {
+        "name": "Rotation Target ID",
+        "type": "int",
+        "desc": "rotate trigger"
+    },
+    "402": {
+        "name": "Rotation Offset",
+        "type": "float",
+        "desc": "rotate trigger"
+    },
+    "404": {
+        "name": "Sound Speed",
+        "type": "int",
+        "desc": "(edit) song/sfx trigger"
+    },
+    "405": {
+        "name": "Pitch",
+        "type": "int",
+        "desc": "sfx trigger"
+    },
+    "406": {
+        "name": "Volume",
+        "type": "float",
+        "desc": "(edit) song/sfx trigger"
+    },
+    "407": {
+        "name": "Enable Reverb",
+        "type": "bool",
+        "desc": "(edit) sfx trigger"
+    },
+    "408": {
+        "name": "Song Start",
+        "type": "int",
+        "desc": "song trigger, sfx trigger"
+    },
+    "409": {
+        "name": "Song Fade In",
+        "type": "int",
+        "desc": "song trigger, sfx trigger"
+    },
+    "410": {
+        "name": "Song End",
+        "type": "int",
+        "desc": "song trigger, sfx trigger"
+    },
+    "411": {
+        "name": "Song Fade Out",
+        "type": "int",
+        "desc": "song trigger, sfx trigger"
+    },
+    "412": {
+        "name": "FFT",
+        "type": "bool",
+        "desc": "sfx trigger"
+    },
+    "413": {
+        "name": "Loop Song",
+        "type": "bool",
+        "desc": "song trigger, sfx trigger"
+    },
+    "414": {
+        "name": "Stop Sound Loop",
+        "type": "bool",
+        "desc": "edit song/sfx trigger"
+    },
+    "415": {
+        "name": "SFX Is Unique",
+        "type": "bool",
+        "desc": "sfx trigger"
+    },
+    "416": {
+        "name": "SFX Unique ID",
+        "type": "int",
+        "desc": "(edit) sfx trigger"
+    },
+    "417": {
+        "name": "Stop Sound",
+        "type": "bool",
+        "desc": "edit song/sfx trigger"
+    },
+    "418": {
+        "name": "Change Volume",
+        "type": "bool",
+        "desc": "edit song/sfx trigger"
+    },
+    "419": {
+        "name": "Change Song Speed",
+        "type": "bool",
+        "desc": "edit song/sfx trigger"
+    },
+    "420": {
+        "name": "SFX Override",
+        "type": "bool",
+        "desc": "sfx trigger"
+    },
+    "421": {
+        "name": "Volume Near",
+        "type": "float",
+        "desc": "edit song trigger, (edit) sfx trigger"
+    },
+    "422": {
+        "name": "Volume Medium",
+        "type": "float",
+        "desc": "edit song trigger, (edit) sfx trigger"
+    },
+    "423": {
+        "name": "Volume Far",
+        "type": "float",
+        "desc": "edit song trigger, (edit) sfx trigger"
+    },
+    "424": {
+        "name": "Sound Minimum Distance",
+        "type": "int",
+        "desc": "edit song trigger, (edit) sfx trigger"
+    },
+    "425": {
+        "name": "Sound Distance 2",
+        "type": "int",
+        "desc": "edit song trigger, (edit) sfx trigger"
+    },
+    "426": {
+        "name": "Sound Distance 3",
+        "type": "int",
+        "desc": "edit song trigger, (edit) sfx trigger"
+    },
+    "428": {
+        "name": "Use Camera",
+        "type": "bool",
+        "desc": "edit song trigger, (edit) sfx trigger: \"Cam\""
+    },
+    "430": {
+        "name": "Linked Events",
+        "type": "array",
+        "desc": "event link trigger; ARRAY OF ENUMS"
+    },
+    "432": {
+        "name": "Song Channel",
+        "type": "int",
+        "desc": "(edit) song trigger"
+    },
+    "433": {
+        "name": "Pre-Load SFX",
+        "type": "bool",
+        "desc": "sfx trigger"
+    },
+    "434": {
+        "name": "SFX Minimum Interval",
+        "type": "float",
+        "desc": "sfx trigger"
+    },
+    "435": {
+        "name": "Sequence Data",
+        "type": "array",
+        "desc": "sequence trigger; groupId.count.groupId.count... etc."
+    },
+    "436": {
+        "name": "Sequence Mode",
+        "type": "int",
+        "desc": "sequence trigger; 0 = stop, 1 = loop, 2 = last"
+    },
+    "437": {
+        "name": "Minimum Interval",
+        "type": "float",
+        "desc": "sequence trigger"
+    },
+    "438": {
+        "name": "Sequence Reset",
+        "type": "float",
+        "desc": "sequence trigger"
+    },
+    "439": {
+        "name": "Sequence Reset Mode",
+        "type": "bool",
+        "desc": "sequence trigger; 0 = full, 1 = step"
+    },
+    "440": {
+        "name": "Pickup Item Particle",
+        "type": "int",
+        "desc": "pickup item"
+    },
+    "441": {
+        "name": "Spawn Ordered",
+        "type": "bool",
+        "desc": "spawn trigger"
+    },
+    "442": {
+        "name": "Spawn Group ID Remapping",
+        "type": "array",
+        "desc": "spawn trigger"
+    },
+    "443": {
+        "name": "Static Rotate Force Additive",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "445": {
+        "name": "Claim Touch",
+        "type": "bool",
+        "desc": "trigger orb, toggle block"
+    },
+    "446": {
+        "name": "Material",
+        "type": "int",
+        "desc": "Extra2"
+    },
+    "447": {
+        "name": "Extra ID",
+        "type": "int",
+        "desc": "event link trigger"
+    },
+    "448": {
+        "name": "Respawn ID",
+        "type": "int",
+        "desc": "checkpoint"
+    },
+    "449": {
+        "name": "Pickup Modifier",
+        "type": "float",
+        "desc": "pickup trigger"
+    },
+    "452": {
+        "name": "Relative Rotation",
+        "type": "bool",
+        "desc": "scale trigger"
+    },
+    "453": {
+        "name": "Smooth Velocity",
+        "type": "bool",
+        "desc": "camera static trigger"
+    },
+    "454": {
+        "name": "Camera Velocity Modifier",
+        "type": "float",
+        "desc": "camera static trigger"
+    },
+    "455": {
+        "name": "SFX Group",
+        "type": "int",
+        "desc": "(edit) sfx trigger"
+    },
+    "458": {
+        "name": "Sound Effect Mode",
+        "type": "int",
+        "desc": "edit sound trigger, (edit) sfx trigger; enum, matches the buttons (0,1,2,3,4,5,6) (read like a book)"
+    },
+    "459": {
+        "name": "Auto Layer",
+        "type": "bool",
+        "desc": "keyframe trigger"
+    },
+    "460": {
+        "name": "No Effects on End",
+        "type": "bool",
+        "desc": "end trigger"
+    },
+    "461": {
+        "name": "No SFX on End",
+        "type": "bool",
+        "desc": "end trigger"
+    },
+    "462": {
+        "name": "Animation Single Frame",
+        "type": "int",
+        "desc": "animation"
+    },
+    "463": {
+        "name": "Pickup Item No Animation",
+        "type": "bool",
+        "desc": "pickup item"
+    },
+    "464": {
+        "name": "Instant Camera",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "465": {
+        "name": "Exit Instant",
+        "type": "bool",
+        "desc": "camera static trigger"
+    },
+    "466": {
+        "name": "Time Counter",
+        "type": "bool",
+        "desc": "counter"
+    },
+    "467": {
+        "name": "Start Time",
+        "type": "float",
+        "desc": "time trigger"
+    },
+    "468": {
+        "name": "Don't Override Time",
+        "type": "bool",
+        "desc": "time trigger"
+    },
+    "469": {
+        "name": "Ignore Time Warp",
+        "type": "bool",
+        "desc": "time trigger"
+    },
+    "470": {
+        "name": "Time Mod",
+        "type": "float",
+        "desc": "time trigger"
+    },
+    "471": {
+        "name": "Start Paused",
+        "type": "bool",
+        "desc": "time trigger"
+    },
+    "472": {
+        "name": "Time Control Stop",
+        "type": "bool",
+        "desc": "time control trigger"
+    },
+    "473": {
+        "name": "Stop/Target Time",
+        "type": "float",
+        "desc": "time / time event trigger"
+    },
+    "474": {
+        "name": "Enable Stop Time",
+        "type": "bool",
+        "desc": "time trigger"
+    },
+    "475": {
+        "name": "Time Event Multi-Active",
+        "type": "bool",
+        "desc": "time event trigger"
+    },
+    "476": {
+        "name": "Item ID 1",
+        "type": "int",
+        "desc": "item edit/compare trigger; 1 = item, 2 = timer, 3 = points, 4 = time, 5 = att"
+    },
+    "477": {
+        "name": "Item ID 2",
+        "type": "int",
+        "desc": "item edit/compare trigger; 1 = item, 2 = timer, 3 = points, 4 = time, 5 = att"
+    },
+    "479": {
+        "name": "Item Mod",
+        "type": "float",
+        "desc": "item edit/compare trigger"
+    },
+    "480": {
+        "name": "Item Edit Arithmetic #1",
+        "type": "int",
+        "desc": "item edit/compare trigger; 1 = +, 2 = -, 3 = *, 4 = /"
+    },
+    "481": {
+        "name": "Item Edit Arithmetic #2",
+        "type": "int",
+        "desc": "item edit/compare trigger; 1 = +, 2 = -, 3 = *, 4 = /"
+    },
+    "482": {
+        "name": "Item Edit Arithmetic #3",
+        "type": "int",
+        "desc": "item edit/compare trigger; 0 = ==, 1 = >, 2 = < or >=, 3 = * or <, 4 = / or <=, 5 = !="
+    },
+    "483": {
+        "name": "Item Mod 2",
+        "type": "float",
+        "desc": "item compare trigger"
+    },
+    "484": {
+        "name": "Item Comparison Variance",
+        "type": "float",
+        "desc": "item compare trigger, \"Tol+-\""
+    },
+    "485": {
+        "name": "Item Edit Inner Function #1",
+        "type": "int",
+        "desc": "item edit/compare trigger; 1 = round, 2 = floor, 3 = ceiling"
+    },
+    "486": {
+        "name": "Item Edit Inner Function #2",
+        "type": "int",
+        "desc": "item edit/compare trigger; 1 = round, 2 = floor, 3 = ceiling"
+    },
+    "487": {
+        "name": "Instant End",
+        "type": "bool",
+        "desc": "end trigger"
+    },
+    "488": {
+        "name": "Text Kerning",
+        "type": "int",
+        "desc": "text"
+    },
+    "489": {
+        "name": "Ignore Volume Test",
+        "type": "bool",
+        "desc": "sfx trigger"
+    },
+    "491": {
+        "name": "Persist Item",
+        "type": "bool",
+        "desc": "item pers trigger"
+    },
+    "492": {
+        "name": "Target All",
+        "type": "bool",
+        "desc": "item pers trigger"
+    },
+    "493": {
+        "name": "Item Reset",
+        "type": "bool",
+        "desc": "item pers trigger"
+    },
+    "494": {
+        "name": "Item Timer",
+        "type": "bool",
+        "desc": "item pers trigger"
+    },
+    "495": {
+        "name": "Extra Sticky",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "496": {
+        "name": "Don't Boost Y",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "498": {
+        "name": "Beats per Minute",
+        "type": "int",
+        "desc": "bpm trigger"
+    },
+    "499": {
+        "name": "BPM Speed",
+        "type": "int",
+        "desc": "bpm trigger; 0 = blue, 1 = yellow, 2 = green, 3 = pink, 4 = red"
+    },
+    "500": {
+        "name": "Disable BPM",
+        "type": "bool",
+        "desc": "bpm trigger"
+    },
+    "501": {
+        "name": "Beats per Bar",
+        "type": "int",
+        "desc": "bpm trigger"
+    },
+    "502": {
+        "name": "New Global Reverb",
+        "type": "int",
+        "desc": "sfx trigger; ENUM"
+    },
+    "503": {
+        "name": "Edit Global Reverb",
+        "type": "bool",
+        "desc": "sfx trigger"
+    },
+    "504": {
+        "name": "Spawn Only",
+        "type": "bool",
+        "desc": "trigger orb, toggle block"
+    },
+    "505": {
+        "name": "Unique Remap",
+        "type": "bool",
+        "desc": "sequence trigger"
+    },
+    "506": {
+        "name": "Preview Opacity",
+        "type": "float",
+        "desc": "camera guide trigger"
+    },
+    "507": {
+        "name": "No Particle",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "509": {
+        "name": "Don't Boost X",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "510": {
+        "name": "Snap Ground",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "511": {
+        "name": "Extended Collision",
+        "type": "bool",
+        "desc": "Extra"
+    },
+    "512": {
+        "name": "Shader Maximum Size",
+        "type": "float",
+        "desc": "shader triggers"
+    },
+    "516": {
+        "name": "Aim Minimum X ID",
+        "type": "int",
+        "desc": "rotate trigger"
+    },
+    "517": {
+        "name": "Aim Minimum Y ID",
+        "type": "int",
+        "desc": "rotate trigger"
+    },
+    "518": {
+        "name": "Aim Maximum X ID",
+        "type": "int",
+        "desc": "rotate trigger"
+    },
+    "519": {
+        "name": "Aim Maximum Y ID",
+        "type": "int",
+        "desc": "rotate trigger"
+    },
+    "520": {
+        "name": "Keyframe Time Mod",
+        "type": "float",
+        "desc": "keyframe"
+    },
+    "521": {
+        "name": "Keyframe Position X Mod",
+        "type": "float",
+        "desc": "keyframe"
+    },
+    "522": {
+        "name": "Keyframe Rotation Mod",
+        "type": "float",
+        "desc": "keyframe"
+    },
+    "523": {
+        "name": "Keyframe Scale X Mod",
+        "type": "float",
+        "desc": "keyframe"
+    },
+    "525": {
+        "name": "Extra ID 2",
+        "type": "int",
+        "desc": "event link trigger"
+    },
+    "526": {
+        "name": "Minimum Force",
+        "type": "float",
+        "desc": "force block"
+    },
+    "527": {
+        "name": "Maximum Force",
+        "type": "float",
+        "desc": "force block"
+    },
+    "528": {
+        "name": "Relative Force",
+        "type": "bool",
+        "desc": "force block"
+    },
+    "529": {
+        "name": "Range Force",
+        "type": "bool",
+        "desc": "force block"
+    },
+    "530": {
+        "name": "Force ID",
+        "type": "int",
+        "desc": "force block"
+    },
+    "531": {
+        "name": "Mysterious Shader Checkbox",
+        "type": "bool",
+        "desc": "shader triggers"
+    },
+    "532": {
+        "name": "Hide Attempts",
+        "type": "int",
+        "desc": "options trigger"
+    },
+    "533": {
+        "name": "Background/Ground/Middleground ID",
+        "type": "int",
+        "desc": "background/ground/middleground (BG/G/MG) triggers"
+    },
+    "534": {
+        "name": "Control ID",
+        "type": "int",
+        "desc": "Extra2, only some objects: orbs, pads, portals, triggers, pickup items"
+    },
+    "535": {
+        "name": "Use Control ID",
+        "type": "bool",
+        "desc": "stop & edit advanced follow triggers"
+    },
+    "536": {
+        "name": "Keyframe Clockwise",
+        "type": "int",
+        "desc": "keyframe trigger; 0 = default, 1 = clockwise, 2 = counterclockwise"
+    },
+    "537": {
+        "name": "Keyframe Times 360",
+        "type": "int",
+        "desc": "keyframe trigger"
+    },
+    "538": {
+        "name": "Area Move Special Center Group ID",
+        "type": "int",
+        "desc": "area move/rotate/scale/fade/tint trigger; from -1 to -11: P1, P2, C, BL, CL, TL, BC, TC, BR, CR, TR"
+    },
+    "539": {
+        "name": "Don't Edit Area Parent",
+        "type": "bool",
+        "desc": "area move/rotate/scale/fade/tint trigger (\"DE AP\")"
+    },
+    "540": {
+        "name": "Stop Player Jump",
+        "type": "bool",
+        "desc": "player control trigger"
+    },
+    "541": {
+        "name": "Stop Player Move",
+        "type": "bool",
+        "desc": "player control trigger"
+    },
+    "542": {
+        "name": "Stop Player Rotation",
+        "type": "bool",
+        "desc": "player control trigger"
+    },
+    "543": {
+        "name": "Stop Player Slide",
+        "type": "bool",
+        "desc": "player control trigger"
+    },
+    "544": {
+        "name": "Move Silent",
+        "type": "bool",
+        "desc": "move trigger"
+    },
+    "545": {
+        "name": "Keyframe Position Y Mod",
+        "type": "float",
+        "desc": "keyframe"
+    },
+    "546": {
+        "name": "Keyframe Scale Y Mod",
+        "type": "float",
+        "desc": "keyframe"
+    },
+    "547": {
+        "name": "Particle Offset X",
+        "type": "int",
+        "desc": "spawn particle trigger"
+    },
+    "548": {
+        "name": "Particle Offset Y",
+        "type": "int",
+        "desc": "spawn particle trigger"
+    },
+    "549": {
+        "name": "Particle Offset X Variance",
+        "type": "int",
+        "desc": "spawn particle trigger"
+    },
+    "550": {
+        "name": "Particle Offset Y Variance",
+        "type": "int",
+        "desc": "spawn particle trigger"
+    },
+    "551": {
+        "name": "Particle Match Rotation",
+        "type": "bool",
+        "desc": "spawn particle trigger"
+    },
+    "552": {
+        "name": "Particle Rotation",
+        "type": "int",
+        "desc": "spawn particle trigger"
+    },
+    "553": {
+        "name": "Particle Rotation Variance",
+        "type": "int",
+        "desc": "spawn particle trigger"
+    },
+    "554": {
+        "name": "Particle Scale",
+        "type": "float",
+        "desc": "spawn particle trigger"
+    },
+    "555": {
+        "name": "Particle Scale Variance",
+        "type": "float",
+        "desc": "spawn particle trigger"
+    },
+    "556": {
+        "name": "Spawn Delay Mod",
+        "type": "float",
+        "desc": "spawn trigger"
+    },
+    "557": {
+        "name": "Keyframe Spawn Delay",
+        "type": "float",
+        "desc": "keyframe trigger"
+    },
+    "558": {
+        "name": "Follow Friction",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "559": {
+        "name": "Follow Friction Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "560": {
+        "name": "Follow Start Speed Extra Option",
+        "type": "int",
+        "desc": "(edit) advanced follow trigger"
+    },
+    "561": {
+        "name": "Follow Near Friction",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "562": {
+        "name": "Follow Near Friction Variance",
+        "type": "float",
+        "desc": "advanced follow trigger"
+    },
+    "563": {
+        "name": "Follow Start Direction",
+        "type": "int",
+        "desc": "(edit) advanced follow trigger"
+    },
+    "564": {
+        "name": "Follow Start Direction Variance",
+        "type": "int",
+        "desc": "(edit) advanced follow trigger"
+    },
+    "565": {
+        "name": "Follow Start Direction Extra Option",
+        "type": "int",
+        "desc": "(edit) advanced follow trigger"
+    },
+    "566": {
+        "name": "Follow Mod X",
+        "type": "float",
+        "desc": "edit (& re-target) advanced follow trigger"
+    },
+    "567": {
+        "name": "Follow Mod X Variance",
+        "type": "float",
+        "desc": "edit advanced follow trigger"
+    },
+    "568": {
+        "name": "Follow Mod Y",
+        "type": "float",
+        "desc": "edit (& re-target) advanced follow trigger"
+    },
+    "569": {
+        "name": "Follow Mod Y Variance",
+        "type": "float",
+        "desc": "edit advanced follow trigger"
+    },
+    "570": {
+        "name": "Redirection Follow Direction",
+        "type": "bool",
+        "desc": "edit advanced follow trigger"
+    },
+    "571": {
+        "name": "Follow Exclusive",
+        "type": "bool",
+        "desc": "advanced follow trigger"
+    },
+    "572": {
+        "name": "Follow Mode",
+        "type": "int",
+        "desc": "advanced follow trigger; 0 = init, 1 = set, 2 = add"
+    },
+    "573": {
+        "name": "Edit Respawn Time",
+        "type": "bool",
+        "desc": "options trigger"
+    },
+    "574": {
+        "name": "Respawn Time",
+        "type": "float",
+        "desc": "options trigger"
+    },
+    "575": {
+        "name": "Audio on Death",
+        "type": "int",
+        "desc": "options trigger"
+    },
+    "576": {
+        "name": "No Death SFX",
+        "type": "int",
+        "desc": "options trigger"
+    },
+    "577": {
+        "name": "Relative Scale",
+        "type": "bool",
+        "desc": "scale trigger"
+    },
+    "578": {
+        "name": "Item Edit Outer Function #1",
+        "type": "int",
+        "desc": "item edit/compare trigger; 1 = abs, 2 = neg"
+    },
+    "579": {
+        "name": "Item Edit Outer Function #2",
+        "type": "int",
+        "desc": "item edit/compare trigger; 1 = abs, 2 = neg"
+    },
+    "580": {
+        "name": "Pause or Resume",
+        "type": "int",
+        "desc": "stop trigger; 1 = pause, 2 = resume"
+    },
+    "581": {
+        "name": "Reset Remap",
+        "type": "bool",
+        "desc": "spawn trigger"
+    },
+    "582": {
+        "name": "Velocity X Modifier",
+        "type": "float",
+        "desc": "rotate gameplay trigger"
+    },
+    "583": {
+        "name": "Velocity Y Modifier",
+        "type": "float",
+        "desc": "rotate gameplay trigger"
+    },
+    "584": {
+        "name": "Override Velocity",
+        "type": "bool",
+        "desc": "rotate gameplay trigger"
+    },
+    "585": {
+        "name": "Don't Slide",
+        "type": "bool",
+        "desc": "rotate gameplay trigger"
+    },
+    "591": {
+        "name": "Redirect Dash",
+        "type": "bool",
+        "desc": "teleport"
+    },
+    "592": {
+        "name": "Offset Animation",
+        "type": "bool",
+        "desc": "animation"
+    },
+    "593": {
+        "name": "Boost Slide",
+        "type": "int",
+        "desc": "options trigger"
+    }
+}
