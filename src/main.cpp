@@ -767,3 +767,4 @@ class $modify(LevelEditorLayer) {
 // editing attributes
 // use layouts where applicable instead of manual positioning
 // ability to hide certain attributes. imagine how annoying it would be to inspect relationships between attributes if theres like 50 ones you dont care about between them
+// probably not in version 1.0, but enum support for 1.1 would be dope
