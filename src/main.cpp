@@ -765,3 +765,4 @@ class $modify(LevelEditorLayer) {
 // dont crash if you press alt+f12 with nothing selected
 // the other views (json, info, raw)
 // editing attributes
+// use layouts where applicable instead of manual positioning
