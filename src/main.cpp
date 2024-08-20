@@ -29,16 +29,91 @@ enum {
 	NORMAL_VIEW // "Detailed"
 };
 
-class ObjectView : public geode::Border {
+CCPoint getPositionInNode(CCNode* spatialNode, CCNode* nodeToGetPositionOf) {
+	auto localPos = nodeToGetPositionOf->getParent()->convertToWorldSpace(nodeToGetPositionOf->getPosition());
+	return spatialNode->convertToNodeSpace(localPos);
+}
 
+CCRect getRectInNode(CCNode* spatialNode, CCNode* rectNode) {
+	CCPoint bottomLeft = rectNode->convertToWorldSpace(ccp(0.f, 0.f));
+	CCPoint topRight = rectNode->convertToWorldSpace(ccp(rectNode->getContentWidth(), rectNode->getContentHeight()));
+	CCRect rect;
+	rect.setRect(
+		bottomLeft.x,
+		bottomLeft.y,
+		topRight.x - bottomLeft.x,
+		topRight.y - bottomLeft.y
+	);
+	return rect;
+}
+
+class ObjectView : public CCNode {
+
+	geode::Border* m_window;
 	CCClippingNode* mask = nullptr;
 
 	bool init(float size) {
-		
-		if (!Border::init(ccColor4B{ 0, 0, 0, 0 }, CCSize(size, size))) return false;
 
-		this->setAnchorPoint(ccp(0.5f, 0.5f));
-		this->ignoreAnchorPointForPosition(false);
+		m_window = Border::create(nullptr, ccColor4B{ 0, 0, 0, 0 }, CCSize(size, size));
+		if (!m_window) return false;
+		m_window->setAnchorPoint(ccp(0.5f, 0.5f));
+		m_window->ignoreAnchorPointForPosition(false);
+		this->addChild(m_window);
+
+		// button layout
+
+		/*
+		
+		leave space for list settings button here
+
+		focus button
+		zoom in and zoom out buttons       GJ_zoomOutBtn_001.png GJ_zoomInBtn_001.png
+		< >    <-- arrows (use blue arrow texture as in startpos switch) to switch selected object  GJ_arrow_02_001.png
+		2/5    <-- selected object / number of objects selected
+		
+		*/
+
+		auto buttons = CCMenu::create();
+
+		auto indexLabel = CCLabelBMFont::create("1/10", "chatFont.fnt");
+		indexLabel->setWidth(50.f);
+		indexLabel->limitLabelWidth(50.f, 1.f, 0.1f);
+		buttons->addChild(indexLabel);
+
+		auto arrowPrev = CCMenuItemSpriteExtra::create(
+			CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png"),
+			nullptr, nullptr
+		);
+		buttons->addChild(arrowPrev);
+
+		auto arrowNext = CCMenuItemSpriteExtra::create(
+			CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png"),
+			nullptr, nullptr
+		);
+		buttons->addChild(arrowNext);
+
+		auto zoomOut = CCMenuItemSpriteExtra::create(
+			CCSprite::createWithSpriteFrameName("GJ_zoomOutBtn_001.png"),
+			nullptr, nullptr
+		);
+		buttons->addChild(zoomOut);
+
+		auto zoomIn = CCMenuItemSpriteExtra::create(
+			CCSprite::createWithSpriteFrameName("GJ_zoomInBtn_001.png"),
+			nullptr, nullptr
+		);
+		buttons->addChild(zoomIn);
+
+		this->addChild(buttons);
+
+		auto layout = RowLayout::create();
+		layout->setCrossAxisReverse(true);
+		layout->setAxisAlignment(AxisAlignment::Start);
+		layout->setCrossAxisAlignment(AxisAlignment::Start);
+		layout->setCrossAxisLineAlignment(AxisAlignment::Center);
+		layout->setGrowCrossAxis(true);
+		this->setLayout(layout);
+		this->updateLayout();
 
 		return true;
 
@@ -62,12 +137,16 @@ public:
 		CCNode* objLayerParent = objLayer->getParent();
 		CCPoint objPos = objLayerParent->convertToNodeSpace(objLayer->convertToWorldSpace(object->getPosition()));
 		CCSize editLayerSize = editorLayer->getContentSize();
-		CCRect rect = this->boundingBox();
-		CCPoint moveTo = objLayerParent->convertToNodeSpace(this->convertToWorldSpace(
-			ccp(this->getContentWidth() / 2, this->getContentHeight() / 2)
+		CCRect rect = m_window->boundingBox();
+		CCPoint moveTo = objLayerParent->convertToNodeSpace(m_window->convertToWorldSpace(
+			ccp(m_window->getContentWidth() / 2, m_window->getContentHeight() / 2)
 		));
 		objLayer->setPosition(objLayer->getPosition() - objPos + moveTo);
 
+	}
+
+	CCNode* getNodeToClipBehind() {
+		return m_window;
 	}
 
 };
@@ -615,9 +694,10 @@ protected:
 		auto* mask = CCDrawNode::create();
 		mask->ignoreAnchorPointForPosition(true);
 		mask->setContentSize(newParent->getContentSize());
-		auto rect = objView->boundingBox();
+		auto rect = getRectInNode(this, objView->getNodeToClipBehind());
 		mask->drawRect(
-			ccp(rect.getMinX() + 1.f, rect.getMinY() + 1.f), ccp(rect.getMaxX() - 1.f, rect.getMaxY() - 1.f),
+			ccp(rect.getMinX() + 1.f, rect.getMinY() + 1.f),
+			ccp(rect.getMaxX() - 1.f, rect.getMaxY() - 1.f),
 			ccColor4F{ 0.f, 0.f, 0.f, 1.f }, 0.f, ccColor4F{ 0.f, 0.f, 0.f, 0.f }
 		);
 		newParent->setStencil(mask);
