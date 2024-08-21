@@ -54,6 +54,9 @@ class ObjectView : public CCNode {
 
 	bool init(float size) {
 
+		this->setAnchorPoint(ccp(0.5f, 0.5f));
+		this->setContentWidth(200.f);
+
 		m_window = Border::create(nullptr, ccColor4B{ 0, 0, 0, 0 }, CCSize(size, size));
 		if (!m_window) return false;
 		m_window->setAnchorPoint(ccp(0.5f, 0.5f));
@@ -73,12 +76,24 @@ class ObjectView : public CCNode {
 		
 		*/
 
+		float buttonWidth = 15.f;
+		float gapWidth = 5.f;
+		float menuWidth = 2 * buttonWidth + gapWidth;
+
 		auto buttons = CCMenu::create();
+		buttons->setContentWidth(menuWidth);
 
 		auto indexLabel = CCLabelBMFont::create("1/10", "chatFont.fnt");
-		indexLabel->setWidth(50.f);
-		indexLabel->limitLabelWidth(50.f, 1.f, 0.1f);
-		buttons->addChild(indexLabel);
+		indexLabel->limitLabelWidth(menuWidth, 1.f, 0.1f);
+
+		auto indexLabelContainer = CCNode::create();
+		indexLabelContainer->setContentWidth(menuWidth);
+		indexLabelContainer->setContentHeight(indexLabel->getContentHeight());
+		indexLabel->setAnchorPoint(ccp(0.5f, 0.5f));
+		indexLabel->setPosition(ccp(indexLabelContainer->getContentWidth() / 2.f, indexLabelContainer->getContentHeight() / 2.f));
+		indexLabelContainer->addChild(indexLabel);
+
+		buttons->addChild(indexLabelContainer);
 
 		auto arrowPrev = CCMenuItemSpriteExtra::create(
 			CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png"),
@@ -104,6 +119,18 @@ class ObjectView : public CCNode {
 		);
 		buttons->addChild(zoomIn);
 
+		auto focus = CircleButtonSprite::createWithSprite("focus.png"_spr);
+		buttons->addChild(focus);
+
+		arrowPrev->setScale(buttonWidth / arrowPrev->getContentWidth());
+		arrowNext->setScale(buttonWidth / arrowNext->getContentWidth());
+		zoomOut->setScale(buttonWidth / zoomOut->getContentWidth());
+		zoomIn->setScale(buttonWidth / zoomIn->getContentWidth());
+		focus->setScale(buttonWidth / focus->getContentWidth());
+		
+		arrowNext->setScaleY(-arrowNext->getScaleY());
+		arrowNext->setRotation(180.f);
+
 		this->addChild(buttons);
 
 		auto layout = RowLayout::create();
@@ -112,6 +139,14 @@ class ObjectView : public CCNode {
 		layout->setCrossAxisAlignment(AxisAlignment::Start);
 		layout->setCrossAxisLineAlignment(AxisAlignment::Center);
 		layout->setGrowCrossAxis(true);
+		layout->setCrossAxisOverflow(false);
+		layout->setAutoScale(false);
+		layout->setGap(gapWidth);
+		buttons->setLayout(layout);
+		buttons->updateLayout();
+
+		layout = RowLayout::create();
+		layout->setAutoScale(false);
 		this->setLayout(layout);
 		this->updateLayout();
 

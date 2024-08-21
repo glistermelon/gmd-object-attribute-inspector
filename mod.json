@@ -17,9 +17,7 @@
     ],
 	"resources": {
 		"sprites": [
-			"resources/trash.png",
-			"resources/pencil.png",
-			"resources/checkmark.png"
+			"resources/*.png"
 		],
 		"files": [
 			"resources/docs.json"
