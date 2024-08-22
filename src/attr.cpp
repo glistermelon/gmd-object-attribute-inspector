@@ -2,9 +2,7 @@
 
 #include <string>
 
-using namespace attrtype;
-
-gd::string getTypeLabel(AttributeType type) {
+gd::string attrtype::getTypeLabel(AttributeType type) {
     switch (type) {
         case ATTR_TYPE_INT:
             return "integer";
@@ -23,7 +21,7 @@ gd::string getTypeLabel(AttributeType type) {
     }
 }
 
-gd::string getTypeLabelShort(AttributeType type) {
+gd::string attrtype::getTypeLabelShort(AttributeType type) {
     switch (type) {
         case ATTR_TYPE_INT:
             return "int";
@@ -42,7 +40,7 @@ gd::string getTypeLabelShort(AttributeType type) {
     }
 }
 
-ccColor3B getTypeLabelColor(AttributeType type) {
+ccColor3B attrtype::getTypeLabelColor(AttributeType type) {
     switch (type) {
         case ATTR_TYPE_INT:
             return { 204, 51, 255 };  // purple
@@ -61,7 +59,7 @@ ccColor3B getTypeLabelColor(AttributeType type) {
     }
 }
 
-AttributeType fromJsonString(std::string s) {
+AttributeType attrtype::fromJsonString(std::string s) {
     if (s == "int") return ATTR_TYPE_INT;
     if (s == "float") return ATTR_TYPE_FLOAT;
     if (s == "bool") return ATTR_TYPE_BOOL;

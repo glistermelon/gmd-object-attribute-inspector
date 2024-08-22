@@ -18,20 +18,6 @@ constexpr ccColor4F DARK_BROWN_4F({ (float)DARK_BROWN_4B.r / 255.f, (float)DARK_
 constexpr float PADDING_HORIZONTAL = 50.f;
 constexpr float PADDING_VERTICAL = 50.f;
 
-CCPoint getPositionInNode(CCNode* spatialNode, CCNode* nodeToGetPositionOf) {
-	auto localPos = nodeToGetPositionOf->getParent()->convertToWorldSpace(nodeToGetPositionOf->getPosition());
-	return spatialNode->convertToNodeSpace(localPos);
-}
+CCPoint getPositionInNode(CCNode* spatialNode, CCNode* nodeToGetPositionOf);
 
-CCRect getRectInNode(CCNode* spatialNode, CCNode* rectNode) {
-	CCPoint bottomLeft = rectNode->convertToWorldSpace(ccp(0.f, 0.f));
-	CCPoint topRight = rectNode->convertToWorldSpace(ccp(rectNode->getContentWidth(), rectNode->getContentHeight()));
-	CCRect rect;
-	rect.setRect(
-		bottomLeft.x,
-		bottomLeft.y,
-		topRight.x - bottomLeft.x,
-		topRight.y - bottomLeft.y
-	);
-	return rect;
-}
+CCRect getRectInNode(CCNode* spatialNode, CCNode* rectNode);

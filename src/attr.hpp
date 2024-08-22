@@ -1,4 +1,6 @@
-#include <Geode/Geode.hpp>
+#pragma once
+
+#include "include.hpp"
 
 enum AttributeType {
 	ATTR_TYPE_INT,

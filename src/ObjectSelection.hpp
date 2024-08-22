@@ -1,16 +1,21 @@
-#include "include.hpp"
+#pragma once
 
+#include "include.hpp"
 
 #include <vector>
 
 class ObjectSelection {
 
 	std::vector<GameObject*> m_objects;
-	int m_index;
+	int m_index = 0;
 
 public:
 
-	void sortObjects() {
+	inline GameObject* getSelectedObject() {
+		return m_objects[m_index];
+	}
+
+	inline void sortObjects() {
 		std::sort(
 			m_objects.begin(), m_objects.end(),
 			[](GameObject* first, GameObject* second) {
@@ -20,27 +25,30 @@ public:
 			}
 		);
 	}
-	void addObject(GameObject* object) {
-		m_objects->push_back(object);
+	inline void addObject(GameObject* object) {
+		m_objects.push_back(object);
+		this->sortObjects();
 	}
-	template <It> void addObjects(It begin, It end) {
+	
+	template <class It> inline void addObjects(It begin, It end) {
 		for (auto it = begin; it != end; ++it)
-			m_objects->push_back(*it);
+			m_objects.push_back(*it);
+		this->sortObjects();
 	}
 
-	unsigned int getCount() {
+	inline unsigned int getCount() {
 		return m_objects.size();
 	}
-	unsigned int getCurrentIndex() {
+	inline unsigned int getCurrentIndex() {
 		return m_index;
 	}
 
-	void selectPrev() {
+	inline void selectPrev() {
 		if (m_objects.empty()) return;
 		--m_index;
 		if (m_index < 0) m_index = m_objects.size() - 1;
 	}
-	void selectNext() {
+	inline void selectNext() {
 		if (m_objects.empty()) return;
 		++m_index;
 		if (m_index >= m_objects.size()) m_index = 0;

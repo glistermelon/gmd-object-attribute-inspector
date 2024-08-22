@@ -1,3 +1,10 @@
+#pragma once
+
+#include "attr.hpp"
+
+#include <string>
+#include <map>
+
 class AttributeDocs {
 
 	friend struct matjson::Serialize<AttributeDocs>;
@@ -10,7 +17,7 @@ public:
 
 	static std::map<int, AttributeDocs> attributeDocs;
 
-	static AttributeDocs* getDocs(int attr) {
+	inline static AttributeDocs* getDocs(int attr) {
 		auto it = attributeDocs.find(attr);
 		return it == attributeDocs.end() ? nullptr : &it->second;
 	}
@@ -30,5 +37,3 @@ template <> struct matjson::Serialize<AttributeDocs> {
 		return doc;
 	}
 };
-
-decltype(AttributeDocs::attributeDocs) AttributeDocs::attributeDocs;

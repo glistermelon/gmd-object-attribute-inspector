@@ -8,6 +8,14 @@ project(ObjectAttributeViewer VERSION 1.0.0)
 
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp
+    src/attr.cpp
+    src/AttributeDocs.cpp
+    src/AttributeListing.cpp
+    src/include.cpp
+    src/InspectorPopup.cpp
+    src/ObjectAttribute.cpp
+    src/ObjectView.cpp
+    src/TypeContainer.cpp
     # Add any extra C++ source files here
 )
 
