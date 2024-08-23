@@ -65,3 +65,6 @@ build-*/
 
 # Other
 resources-projects/
+
+# CMake?
+CMakeSettings.json
