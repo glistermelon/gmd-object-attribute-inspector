@@ -24,10 +24,7 @@ bool ObjectView::init(float size, ObjectSelection* selection, LevelEditorLayer* 
     buttons->setContentWidth(menuWidth);
     buttons->setContentHeight(m_window->getContentHeight());
 
-    std::stringstream indexLabelStream;
-    indexLabelStream << m_selection->getCurrentIndex() << "/" << m_selection->getCount();
-    std::string indexLabelStr = indexLabelStream.str();
-    m_indexLabel = CCLabelBMFont::create(indexLabelStr.c_str(), "chatFont.fnt");
+    m_indexLabel = CCLabelBMFont::create("X", "chatFont.fnt");
     m_indexLabel->limitLabelWidth(menuWidth, 1.f, 0.1f);
 
     auto indexLabelContainer = CCNode::create();
@@ -107,6 +104,8 @@ bool ObjectView::init(float size, ObjectSelection* selection, LevelEditorLayer* 
     layout->setAutoScale(false);
     this->setLayout(layout);
     this->updateLayout();
+
+    this->updateIndexLabel();
 
     return true;
 

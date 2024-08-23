@@ -28,4 +28,6 @@ public:
 
 	static AttributeListing* create(ObjectAttribute* objAttr);
 
+	void editCallback(CCObject*);
+
 };

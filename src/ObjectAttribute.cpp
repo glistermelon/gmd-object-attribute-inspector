@@ -14,3 +14,7 @@ ObjectAttribute::ObjectAttribute(GameObject* object, int key, std::string unpars
     }
     else this->setUnknownValue(unparsedValue);
 }
+
+void ObjectAttribute::editCallback(CCObject*) {
+    
+}

@@ -144,7 +144,7 @@ InspectorPopup* InspectorPopup::create(ObjectSelection* objects, LevelEditorLaye
 
 void InspectorPopup::setObject(GameObject* object) {
 
-    bool firstUpdate = m_attrList;
+    bool firstUpdate = !m_attrList;
     if (m_attrList) this->removeChild(m_attrList);
 
     CCArray* listItems = CCArray::create();

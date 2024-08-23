@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} SHARED
     src/main.cpp
     src/attr.cpp
     src/AttributeDocs.cpp
+    src/AttributeEditor.cpp
     src/AttributeListing.cpp
     src/include.cpp
     src/InspectorPopup.cpp

@@ -22,4 +22,6 @@ public:
 	inline decltype(m_key) getKey() { return m_key; }
 	inline AttributeDocs* getDocs() { return m_docs; }
 
+	void editCallback(CCObject*);
+
 };

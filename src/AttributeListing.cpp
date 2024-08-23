@@ -1,5 +1,7 @@
 #include "AttributeListing.hpp"
 
+#include "AttributeEditor.hpp"
+
 const CCSize ATTR_LISTING_SIZE = CCSize(300.f, 60.f);
 
 bool AttributeListing::init(ObjectAttribute* objAttr) {
@@ -67,7 +69,7 @@ bool AttributeListing::init(ObjectAttribute* objAttr) {
     trashSprite->setScale(0.7f);
     editSprite->setScale(0.7f);
     auto trash = CCMenuItemSpriteExtra::create(trashSprite, this, nullptr);
-    auto edit = CCMenuItemSpriteExtra::create(editSprite, this, nullptr);
+    auto edit = CCMenuItemSpriteExtra::create(editSprite, this, menu_selector(AttributeListing::editCallback));
     buttons->addChild(trash);
     buttons->addChild(edit);
     buttons->setContentWidth(250.f);
@@ -133,4 +135,8 @@ AttributeListing* AttributeListing::create(ObjectAttribute* objAttr) {
     }
     delete listing;
     return nullptr;
+}
+
+void AttributeListing::editCallback(CCObject*) {
+    AttributeEditor::create(m_attr)->show();
 }
