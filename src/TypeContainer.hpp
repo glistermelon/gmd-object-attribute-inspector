@@ -37,6 +37,9 @@ public:
 	inline TypeContainer() {
 		m_type = ATTR_TYPE_UNKNOWN;
 	}
+	inline TypeContainer(AttributeType type) {
+		m_type = type;
+	}
 	inline TypeContainer(int val) {
 		m_intVal = val;
 		m_type = ATTR_TYPE_INT;

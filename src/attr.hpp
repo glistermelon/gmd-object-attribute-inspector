@@ -2,6 +2,8 @@
 
 #include "include.hpp"
 
+#include <optional>
+
 enum AttributeType {
 	ATTR_TYPE_INT,
 	ATTR_TYPE_FLOAT,
@@ -34,7 +36,8 @@ namespace attrtype {
 			"Boolean",
 			"Array",
 			"Color",
-			"String"
+			"String",
+			"Unknown"
 		};
 	}
 

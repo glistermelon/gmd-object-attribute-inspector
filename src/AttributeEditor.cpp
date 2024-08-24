@@ -2,39 +2,9 @@
 
 #include "attr.hpp"
 
-template <class Opt, class T = std::string, auto Stringify = do_nothing<std::string>>
-class EnumSelectList : public SelectList<T, Stringify> {
-
-    using Super = SelectList<T, Stringify>;
-
-    std::vector<Opt> m_options;
-
-    bool init(float width, std::vector<Opt> const& options, std::vector<T> const& labels, utils::MiniFunction<void(Opt)> onChange) {
-        if (options.size() != labels.size() || options.empty()) return false;
-        if (!Super::init(width, labels, [this, &onChange](const T&, size_t) { onChange(this->getSelectedOption()); })) return false;
-        m_options = options;
-        return true;
-    }
-
-public:
-
-    static EnumSelectList* create(float width, std::vector<Opt> options, std::vector<T> const& labels, utils::MiniFunction<void(Opt)> onChange = [](Opt) {}) {
-        auto* list = new EnumSelectList();
-        if (list->init(width, options, labels, onChange)) {
-            list->autorelease();
-            return list;
-        }
-        delete list;
-        return nullptr;
-    }
-
-    Opt getSelectedOption() {
-        return m_options[Super::m_index];
-    }
-
-};
-
 bool AttributeEditor::setup(ObjectAttribute* objAttr) {
+
+    auto container = CCNode::create();
 
     auto primaryButtons = CCMenu::create();
     auto cancel = CCMenuItemSpriteExtra::create(ButtonSprite::create("Cancel"), nullptr, nullptr);
@@ -43,16 +13,31 @@ bool AttributeEditor::setup(ObjectAttribute* objAttr) {
     primaryButtons->addChild(commit);
     primaryButtons->setLayout(RowLayout::create());
     primaryButtons->updateLayout();
-    m_mainLayer->addChild(primaryButtons);
+    primaryButtons->setScale(0.75f);
+    container->addChild(primaryButtons);
 
-    auto input = TextInput::create(150.f, "New Value", "chatFont.fnt");
-    m_mainLayer->addChild(input);
+    m_textInput = ColorableTextInput::create(350.f, "New Value", "chatFont.fnt");
+    m_textInput->setCallback([this](const std::string& text) {
+        if (TypeContainer(m_typeInput->getSelectedOption()).setValue(text)) m_textInput->resetColor();
+        else m_textInput->setColor(ccColor3B { 255, 100, 100 });
+    });
+    container->addChild(m_textInput);
 
     auto typeOptions = attrtype::getTypes();
-    typeOptions.pop_back(); // ATTR_TYPE_UNKNOWN
     auto typeLabels = attrtype::getTypeStrings<gd::string>();
-    auto typeInput = EnumSelectList<AttributeType, gd::string>::create(100.f, typeOptions, typeLabels);
-    m_mainLayer->addChild(typeInput);
+    typeLabels.pop_back();
+    typeLabels.push_back("None");
+    m_typeInput = EnumSelectList<AttributeType, gd::string>::create(100.f, typeOptions, typeLabels);
+    container->addChild(m_typeInput);
+
+    this->addChild(container);
+
+    container->setPosition(ccp(m_mainLayer->getContentWidth() / 2, m_mainLayer->getContentHeight() / 2));
+    container->setAnchorPoint(ccp(0.5f, 0.5f));
+    container->setContentSize(m_mainLayer->getContentSize());
+
+    container->setLayout(ColumnLayout::create());
+    container->updateLayout();
 
     return true;
 
@@ -60,7 +45,7 @@ bool AttributeEditor::setup(ObjectAttribute* objAttr) {
 
 AttributeEditor* AttributeEditor::create(ObjectAttribute* objAttr) {
     auto* editor = new AttributeEditor();
-    if (editor->init(200.f, 100.f, objAttr)) {
+    if (editor->init(400.f, 130.f, objAttr)) {
         editor->autorelease();
         return editor;
     }
