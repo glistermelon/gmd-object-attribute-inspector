@@ -116,12 +116,21 @@ class $modify(LevelEditorLayer) {
 	* warning if type decided in GameObjectWrapper constructor doesn't match the docs
 	* currently, when you commit an attribute edit, you have to reopen the popup for the new value to appear in listing. fix that
 	* fix the weird bug where every time you switch between objects you have selected it adds another attribute view node (the node that has the 3 view node type things inside it)
-	* refactoring, cleanup, check style guidelines
 	* add functionality to the "enable type handling" button
 		* basically just disable 90% of the features when it isnt checked
 			* dont show types in listing
 			* editor should always just use raw text input, and shouldnt show the type-switcher-thing
 			* json values in json view should always just be the raw strings
+	* refactoring, cleanup, check style guidelines
+		* move any sizable functions out of headers (looking at GameObjectWrapper here)
+		* decide: should tiny functions (currently marked inline and left in headers) stay in headers? dunno yet, but probably not
+		* most of the code in main.cpp needs to be shilled out to the cpp for the class it deals with
+		* i think there are some calls to functions in geode::log that need to be removed
+		* memory management
+		* review usage of ObjectSelection. it seems a little unnecessary maybe?
+		* file names, organization (looking at attr.hpp and attr.cpp)
+	* credit smjs for the color stuff i stole from him
+		* also try to add more macros there because right now for every color you've pasted a bunch of stuff
 	
 	TODO FOR 1.1
 	* support for enums and arrays
