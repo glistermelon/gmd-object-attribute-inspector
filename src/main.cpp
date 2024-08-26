@@ -131,6 +131,9 @@ class $modify(LevelEditorLayer) {
 		* file names, organization (looking at attr.hpp and attr.cpp)
 	* credit smjs for the color stuff i stole from him
 		* also try to add more macros there because right now for every color you've pasted a bunch of stuff
+  		* maybe put this in README or something similar as well as code comments?
+  	* actually deal with those standard geode things
+   		* README.md, about.md, changelog.md, logo.png, mod.json, support.md
 	
 	TODO FOR 1.1
 	* support for enums and arrays
