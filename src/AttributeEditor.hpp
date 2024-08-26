@@ -2,7 +2,7 @@
 
 #include "include.hpp"
 
-#include "ObjectAttribute.hpp"
+#include "GameObjectWrapper.hpp"
 
 template <class Opt, class T = std::string, auto Stringify = do_nothing<std::string>>
 class EnumSelectList : public SelectList<T, Stringify> {
@@ -65,24 +65,60 @@ public:
     }
 
     void setColor(ccColor3B color) {
-        TextInput::m_label->setColor(color);
+        TextInput::m_input->setLabelNormalColor(color);
     }
 
     void resetColor() {
-        TextInput::m_label->setColor(ccColor3B { 255, 255, 255 });
+        TextInput::m_input->setLabelNormalColor(ccColor3B { 255, 255, 255 });
     }
 
 };
 
-class AttributeEditor : public geode::Popup<ObjectAttribute*> {
+class HSVDisplayDelegate : public HSVWidgetDelegate {
+public:
+    void hsvPopupClosed(HSVWidgetPopup* popup, ccHSVValue newHSV) override;
+};
 
-    ColorableTextInput* m_textInput;
-    EnumSelectList<AttributeType, gd::string>* m_typeInput;
+class HSVDisplay : public CCMenu {
 
-    bool setup(ObjectAttribute* objAttr) override;
+    CCLabelBMFont* m_hLabel;
+    CCLabelBMFont* m_sLabel;
+    CCLabelBMFont* m_vLabel;
+    ColorHSV m_hsv;
+
+    bool init(ColorHSV hsv);
 
 public:
 
-    static AttributeEditor* create(ObjectAttribute* objAttr);
+    static HSVDisplay* create(ColorHSV hsv);
+
+    void updateHSV(ColorHSV hsv);
+
+    void buttonCallback(CCObject*);
+
+    inline ColorHSV getColorValue() { return m_hsv; }
+
+};
+
+class AttributeEditor : public geode::Popup<GameObjectWrapper*, int> {
+
+    GameObjectWrapper* m_object;
+    int m_attrKey;
+    ColorableTextInput* m_textInput;
+    EnumSelectList<AttributeType, gd::string>* m_typeInput;
+    EnumSelectList<bool, gd::string>* m_boolInput;
+    HSVDisplay* m_colorInput;
+    CCMenu* m_inputArea;
+
+    bool setup(GameObjectWrapper* object, int attrKey) override;
+    void updateInputArea();
+
+public:
+
+    static AttributeEditor* create(GameObjectWrapper* object, int attrKey);
+
+    void cancel(CCObject*);
+    void commit(CCObject*);
+    void finalizeCommit();
 
 };

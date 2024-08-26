@@ -5,6 +5,9 @@
 
 #include "InspectorPopup.hpp"
 #include "AttributeDocs.hpp"
+#include "NodeExitTracker.hpp"
+
+#include <algorithm>
 
 $execute {
 	
@@ -15,6 +18,9 @@ $execute {
 		{ keybinds::Keybind::create(KEY_F12, keybinds::Modifier::Alt) },
 		"Object Attribute Viewer/GUI"
 	});
+
+	// ByteVector v(5, 0x90);
+	// Mod::get()->patch((void*)(geode::base::get() + 0x38a0a7), v).unwrap();
 
 }
 
@@ -41,9 +47,25 @@ $on_mod(Loaded) {
 #include <Geode/modify/LevelEditorLayer.hpp>
 class $modify(LevelEditorLayer) {
 
+	struct Fields {
+		bool m_noObjectsAlertOpen = false;
+		bool m_inspectorOpen = false;
+	};
+
 	void show_object_attrs() {
-		if (!m_editorUI) return;
+		if (!m_editorUI || m_fields->m_noObjectsAlertOpen || m_fields->m_inspectorOpen) return;
 		CCArrayExt<GameObject*> objects = m_editorUI->getSelectedObjects();
+		if (objects.size() == 0) {
+			auto alert = FLAlertLayer::create(
+				"No Objects Selected!",
+				"You need to select something to use the attribute inspector.",
+				"OK"
+			);
+			alert->show();
+			m_fields->m_noObjectsAlertOpen = true;
+			NodeExitTracker::addNode(alert, [this]() { m_fields->m_noObjectsAlertOpen = false; });
+			return;
+		}
 		std::vector<GameObject*> objectVec;
 		for (auto* obj : objects) objectVec.push_back(obj);
 		auto objSelection = new ObjectSelection;
@@ -51,6 +73,8 @@ class $modify(LevelEditorLayer) {
 		auto* popup = InspectorPopup::create(objSelection, this);
 		if (!popup) return;
 		popup->show();
+		m_fields->m_inspectorOpen = true;
+		NodeExitTracker::addNode(popup, [this]() { m_fields->m_inspectorOpen = false; });
 	}
 
 	bool init(GJGameLevel* p0, bool p1) {
@@ -71,18 +95,43 @@ class $modify(LevelEditorLayer) {
 
 	}
 
+	CCArray* createObjectsFromString(gd::string& str, bool p1, bool p2) {
+		geode::log::info("create {0} {1} {2}", p1, p2, str);
+		return LevelEditorLayer::createObjectsFromString(str, p1, p2);
+	}
+
 };
 
-// TODO: dont open another popup if alt+f12 is pressed twice
-// hide object info text when using object viewer
-// be able to drag the view in the object viewer; add magnifying glass button to focus back on the object
-// mini-window-viewer thing. should only work if ONE object is selected. so you can see changes as you make them
-	// ^ make sure that the object index label updates the total selected counter when new objects are selected
-// ability to toggle live updating of attributes
-// sorting options for attribute list: by key, by name alphabetically, by type; + ability to reverse the list order
-// dont crash if you press alt+f12 with nothing selected
-// the other views (json, info, raw)
-// editing attributes
-// use layouts where applicable instead of manual positioning
-// ability to hide certain attributes. imagine how annoying it would be to inspect relationships between attributes if theres like 50 ones you dont care about between them
-// probably not in version 1.0, but enum support for 1.1 would be dope
+/*
+
+	TODO FOR 1.0
+	* add functionality to zoom in, zoom out, focus buttons
+		* allow dragging the object view with cursor
+			* do NOT allow selecting new objects or doing any editor stuff while doing so
+	* prevent keypresses from going to editor while in popup
+		* for example enter key shouldnt start playtesting
+		* deleting or moving objects with the popup open is also a no-no for now
+	* make the delete button on attribute listings work
+	* add a button/system for adding new attributes to an object
+	* warning if type decided in GameObjectWrapper constructor doesn't match the docs
+	* currently, when you commit an attribute edit, you have to reopen the popup for the new value to appear in listing. fix that
+	* fix the weird bug where every time you switch between objects you have selected it adds another attribute view node (the node that has the 3 view node type things inside it)
+	* refactoring, cleanup, check style guidelines
+	* add functionality to the "enable type handling" button
+		* basically just disable 90% of the features when it isnt checked
+			* dont show types in listing
+			* editor should always just use raw text input, and shouldnt show the type-switcher-thing
+			* json values in json view should always just be the raw strings
+	
+	TODO FOR 1.1
+	* support for enums and arrays
+	* attribute filtering, ordering, and hiding
+		* by key, by name alphabetically, by type; + ability to reverse the list order
+	
+	TODO FOR 1.2
+	* mini-window-viewer thing. should only work if ONE object is selected. so you can see changes as you make them
+	
+	TODO FOR 1.3 (maybe)
+	* more features for actually documenting types, names, descriptions, etc. and contributing?
+
+*/

@@ -136,8 +136,8 @@
     },
     "31": {
         "name": "Text",
-        "type": "str",
-        "desc": "the text of the text object in [base64]()"
+        "type": "string",
+        "desc": "the text of the text object in base64"
     },
     "32": {
         "name": "Scaling",

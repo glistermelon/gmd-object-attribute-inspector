@@ -1,14 +1,15 @@
 #include "AttributeListing.hpp"
 
 #include "AttributeEditor.hpp"
+#include "AttributeDocs.hpp"
 
 const CCSize ATTR_LISTING_SIZE = CCSize(300.f, 60.f);
 
-bool AttributeListing::init(ObjectAttribute* objAttr) {
+bool AttributeListing::init(GameObjectWrapper* object, int attrKey) {
 
-    m_attr = objAttr;
-
-    // GenericListCell::setBorderColor(DARK_BROWN_4B);
+    m_object = object;
+    m_attrKey = attrKey;
+    auto attr = object->getAttribute(attrKey).value();;
 
     m_mainLayer->setContentSize(ATTR_LISTING_SIZE);
 
@@ -18,11 +19,11 @@ bool AttributeListing::init(ObjectAttribute* objAttr) {
     menu->setContentSize(m_mainLayer->getContentSize());
     m_mainLayer->addChild(menu);
     
-    std::string keyStr = std::to_string(m_attr->getKey());
-    std::string valueStr = m_attr->getValueLabel();
+    std::string keyStr = std::to_string(m_attrKey);
+    std::string valueStr = attr.getValueLabel();
 
-    auto keyLabel = CCLabelBMFont::create(keyStr.c_str(), "chatFont.fnt", 30.f);
-    auto valueLabel = CCLabelBMFont::create(valueStr.c_str(), "chatFont.fnt", 100.f);
+    auto keyLabel = CCLabelBMFont::create(keyStr.c_str(), "chatFont.fnt");
+    auto valueLabel = CCLabelBMFont::create(valueStr.c_str(), "chatFont.fnt");
 
     auto keyTextLabel = CCLabelBMFont::create("Key:", "chatFont.fnt");
     keyTextLabel->setScale(0.7f);
@@ -35,6 +36,9 @@ bool AttributeListing::init(ObjectAttribute* objAttr) {
     auto valueBox = CCScale9Sprite::create("square02b_001.png");
     valueBox->setContentSize(CCSize(valueLabel->getContentWidth() / 0.6f, 35.f));
     valueBox->setScale(0.6f);
+
+    keyLabel->limitLabelWidth(keyBox->getContentWidth(), 1.f, 0.01f);
+    valueLabel->limitLabelWidth(valueBox->getContentWidth(), 1.f, 0.01f);
 
     textBoxes.push_back(keyBox);
     textBoxes.push_back(valueBox);
@@ -83,7 +87,7 @@ bool AttributeListing::init(ObjectAttribute* objAttr) {
     buttons->updateLayout();
     menu->addChild(buttons);
 
-    auto docs = m_attr->getDocs();
+    auto docs = AttributeDocs::getDocs(attrKey);
 
     std::string nameStr = docs ? docs->getName() : "Unknown Attribute";
     auto name = CCLabelBMFont::create(nameStr.c_str(), "bigFont.fnt");
@@ -92,13 +96,13 @@ bool AttributeListing::init(ObjectAttribute* objAttr) {
     name->limitLabelWidth(175.f, 0.7f, 0.1f);
     m_mainLayer->addChild(name);
 
-    auto type = m_attr->getType();
+    auto type = attr.getType();
 
     std::stringstream infoStream;
     if (docs) {
         infoStream << "Name: " << nameStr << "\n";
         infoStream << "Type: " << attrtype::getTypeLabel(type) << "\n";
-        infoStream << m_attr->getDocs()->getDescription();
+        infoStream << docs->getDescription();
     }
     std::string infoStr = infoStream.str();
     auto info = InfoAlertButton::create("Attribute Documentation", infoStr.c_str(), 1.f);
@@ -127,9 +131,9 @@ bool AttributeListing::init(ObjectAttribute* objAttr) {
 
 }
 
-AttributeListing* AttributeListing::create(ObjectAttribute* objAttr) {
+AttributeListing* AttributeListing::create(GameObjectWrapper* object, int attrKey) {
     auto* listing = new AttributeListing();
-    if (listing->init(objAttr)) {
+    if (listing->init(object, attrKey)) {
         listing->autorelease();
         return listing;
     }
@@ -138,5 +142,5 @@ AttributeListing* AttributeListing::create(ObjectAttribute* objAttr) {
 }
 
 void AttributeListing::editCallback(CCObject*) {
-    AttributeEditor::create(m_attr)->show();
+    AttributeEditor::create(m_object, m_attrKey)->show();
 }

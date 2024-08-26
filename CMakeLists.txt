@@ -14,9 +14,11 @@ add_library(${PROJECT_NAME} SHARED
     src/AttributeListing.cpp
     src/include.cpp
     src/InspectorPopup.cpp
-    src/ObjectAttribute.cpp
+    src/GameObjectWrapper.cpp
     src/ObjectView.cpp
-    src/TypeContainer.cpp
+    src/ValueContainer.cpp
+    src/JsonTextArea.cpp
+    src/NodeExitTracker.cpp
     # Add any extra C++ source files here
 )
 

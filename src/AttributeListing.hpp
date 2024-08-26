@@ -1,14 +1,15 @@
 #pragma once
 
 #include "include.hpp"
-#include "ObjectAttribute.hpp"
 #include "attr.hpp"
+#include "GameObjectWrapper.hpp"
 
 extern const CCSize ATTR_LISTING_SIZE;
 
 class AttributeListing : public GenericListCell {
 
-	ObjectAttribute* m_attr;
+	GameObjectWrapper* m_object;
+	int m_attrKey;
 	
 	std::vector<CCScale9Sprite*> textBoxes;
 
@@ -22,11 +23,11 @@ public:
 
 private:
 
-	bool init(ObjectAttribute* objAttr);
+	bool init(GameObjectWrapper* object, int attrKey);
 
 public:
 
-	static AttributeListing* create(ObjectAttribute* objAttr);
+	static AttributeListing* create(GameObjectWrapper* object, int attrKey);
 
 	void editCallback(CCObject*);
 

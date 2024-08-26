@@ -1,24 +1,40 @@
 #pragma once
 
+#include "include.hpp"
 #include "attr.hpp"
+
+#include <sstream>
+#include <ios>
 
 struct ColorHSV {
 
-	int h;
-	int s;
-	int v;
+	float h;
+	float s;
+	float v;
 	bool s_on;
 	bool v_on;
 	
-	inline std::string hexCode() {
+	inline std::string str() {
 		std::stringstream ss;
-		ss << "todo"; // https://docs.geode-sdk.org/classes/geode/ColorPickPopup maybe
+		ss << h << ", ";
+		ss << (s_on ? "+" : "x") << s << ", ";
+		ss << (v_on ? "+" : "x") << v;
 		return ss.str();
+	}
+
+	inline ColorHSV() = default;
+
+	inline ColorHSV(float h, float s, float v, bool s_on, bool v_on) : h(h), s(s), v(v), s_on(s_on), v_on(v_on) {}
+
+	inline ColorHSV(ccHSVValue cchsv) : h(cchsv.h), s(cchsv.s), v(cchsv.v), s_on(cchsv.absoluteSaturation), v_on(cchsv.absoluteBrightness) {}
+
+	inline ccHSVValue cchsv() const {
+		return { h, s, v, s_on, v_on };
 	}
 
 };
 
-class TypeContainer {
+class ValueContainer {
 
 	union {
 		int m_intVal;
@@ -26,7 +42,7 @@ class TypeContainer {
 		bool m_boolVal;
 		ColorHSV m_colorVal;
 	};
-	std::string m_strVal; // also used for unknown type
+	std::string m_strVal;
 
 protected:
 
@@ -34,29 +50,29 @@ protected:
 
 public:
 
-	inline TypeContainer() {
+	inline ValueContainer() {
 		m_type = ATTR_TYPE_UNKNOWN;
 	}
-	inline TypeContainer(AttributeType type) {
+	inline ValueContainer(AttributeType type) {
 		m_type = type;
 	}
-	inline TypeContainer(int val) {
+	inline ValueContainer(int val) {
 		m_intVal = val;
 		m_type = ATTR_TYPE_INT;
 	}
-	inline TypeContainer(float val) {
+	inline ValueContainer(float val) {
 		m_floatVal = val;
 		m_type = ATTR_TYPE_FLOAT;
 	}
-	inline TypeContainer(bool val) {
+	inline ValueContainer(bool val) {
 		m_boolVal = val;
 		m_type = ATTR_TYPE_BOOL;
 	}
-	inline TypeContainer(ColorHSV val) {
+	inline ValueContainer(ColorHSV val) {
 		m_colorVal = val;
 		m_type = ATTR_TYPE_COLOR;
 	}
-	inline TypeContainer(std::string val) {
+	inline ValueContainer(std::string val) {
 		m_strVal = val;
 		m_type = ATTR_TYPE_STRING;
 	}
@@ -69,10 +85,6 @@ public:
 	inline std::optional<ColorHSV> getColorValue() { return m_type == ATTR_TYPE_COLOR ? m_colorVal : std::optional<ColorHSV>(); }
 	inline std::optional<std::string> getStringValue() { return m_type == ATTR_TYPE_STRING ? m_strVal : std::optional<std::string>(); }
 
-	bool setValue(std::string unparsed);
-
-	std::string getValueLabel();
-
 	inline void setIntValue(int v) { m_intVal = v; m_type = ATTR_TYPE_INT; }
 	inline void setFloatValue(float v) { m_floatVal = v; m_type = ATTR_TYPE_FLOAT; }
 	inline void setBoolValue(bool v) { m_boolVal = v; m_type = ATTR_TYPE_BOOL; }
@@ -80,10 +92,10 @@ public:
 	inline void setStringValue(std::string v) { m_strVal = v; m_type = ATTR_TYPE_STRING; }
 	inline void setUnknownValue(std::string v) { m_strVal = v; m_type = ATTR_TYPE_UNKNOWN; }
 
-	inline bool setColor(ColorHSV newColor) {
-		if (m_type != ATTR_TYPE_COLOR) return false;
-		m_colorVal = newColor;
-		return true;
-	}
+	bool setValue(std::string unparsed, bool force = false, AttributeType type = ATTR_TYPE_UNKNOWN);
+
+	std::string getValueLabel();
+
+	gd::string getRaw() const;
 
 };
