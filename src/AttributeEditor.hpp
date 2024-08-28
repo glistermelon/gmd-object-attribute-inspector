@@ -117,8 +117,15 @@ public:
 
     static AttributeEditor* create(GameObjectWrapper* object, int attrKey);
 
+    static void commitFailed() {
+        FLAlertLayer::create(
+            "Commit Failed",
+            "Your changes were unable to be applied and have been cancelled.",
+            "OK"
+        )->show();
+    }
+
     void cancel(CCObject*);
     void commit(CCObject*);
-    void finalizeCommit();
 
 };

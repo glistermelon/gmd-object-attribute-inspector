@@ -108,12 +108,12 @@ bool AttributeEditor::setup(GameObjectWrapper* object, int attrKey) {
     });
     m_inputArea->addChild(m_textInput);
 
-    auto attr = m_object->getAttribute(attrKey).value();
-    auto type = attr.getType();
+    auto attr = m_object->getAttribute(attrKey);
+    auto type = attr.has_value() ? attr.value().getType() : ATTR_TYPE_UNKNOWN;
 
     std::vector<bool> boolOptions = { true, false };
     std::vector<gd::string> boolLabels = { "true", "false" };
-    if (type == ATTR_TYPE_BOOL && !attr.getBoolValue()) {
+    if (type == ATTR_TYPE_BOOL && !attr.value().getBoolValue()) {
         std::iter_swap(boolOptions.begin(), boolOptions.begin() + 1);
         std::iter_swap(boolLabels.begin(), boolLabels.begin() + 1);
     }
@@ -136,8 +136,8 @@ bool AttributeEditor::setup(GameObjectWrapper* object, int attrKey) {
     std::rotate(typeOptions.begin(), typeOptions.begin() + typeIndex, typeOptions.end());
     std::rotate(typeLabels.begin(), typeLabels.begin() + typeIndex, typeLabels.end());
 
-    if (type == ATTR_TYPE_COLOR) m_colorInput->updateHSV(attr.getColorValue().value());
-    else if (type != ATTR_TYPE_BOOL) m_textInput->setString(attr.getRaw());
+    if (type == ATTR_TYPE_COLOR) m_colorInput->updateHSV(attr.value().getColorValue().value());
+    else if (type != ATTR_TYPE_BOOL) m_textInput->setString(attr.value().getRaw());
 
     m_typeInput = EnumSelectList<AttributeType, gd::string>::create(
         100.f, typeOptions, typeLabels,
@@ -216,14 +216,6 @@ void AttributeEditor::cancel(CCObject*) {
     this->getParent()->removeChild(this);
 }
 
-void commitFailed() {
-    FLAlertLayer::create(
-        "Commit Failed",
-        "Your changes were unable to be applied and have been cancelled.",
-        "OK"
-    )->show();
-}
-
 void AttributeEditor::commit(CCObject*) {
 
     auto type = m_typeInput->getSelectedOption();
@@ -240,54 +232,9 @@ void AttributeEditor::commit(CCObject*) {
     }
 
     m_object->setAttribute(m_attrKey, attr);
-    
-    std::vector<int> modified;
-    std::vector<int> deleted;
-    std::vector<int> added;
-    if (m_object->tryUpdate(modified, deleted, added)) return commitFailed();
 
-    auto it = std::find(modified.begin(), modified.end(), m_attrKey);
-    if (it != modified.end()) modified.erase(it);
+    m_object->commitWithGUI(m_attrKey, [this](bool committed) {
+        if (committed) this->getParent()->removeChild(this);
+    });
 
-    std::vector<int>* changeVectors[] = { &modified, &deleted, &added };
-    std::string_view changeWords[] = { "modified", "deleted", "created" };
-    std::stringstream warnStream;
-
-    bool noChanges = true;
-    for (auto v : changeVectors) {
-        if (!v->empty()) {
-            noChanges = false;
-            break;
-        }
-    }
-    if (noChanges) return this->finalizeCommit();
-
-    for (int i = 0; i < 3; ++i) {
-        std::vector<int>* changeVec = changeVectors[i];
-        if (!changeVec->empty()) {
-            warnStream << "The following other attributes were" << changeWords[i] << " due to your changes:\n";
-            for (int attrKey : *changeVec) {
-                warnStream << attrKey;
-                auto docs = AttributeDocs::getDocs(attrKey);
-                warnStream << "(" << (docs ? docs->getName() : "Unknown Attribute") << ")\n";
-            }
-        }
-    }
-
-    std::string warnStr = warnStream.str();
-    warnStr.pop_back();
-    createQuickPopup(
-        "Commit Warning",
-        warnStr,
-        "Cancel", "Commit Anyway",
-        [this](auto, bool commitAnyway) {
-            if (commitAnyway) this->finalizeCommit();
-            else m_object->cancelUpdate();
-        }
-    );
-
-}
-
-void AttributeEditor::finalizeCommit() {
-    m_object->finishUpdate();
 }

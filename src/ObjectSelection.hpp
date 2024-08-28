@@ -25,6 +25,7 @@ public:
 			}
 		);
 	}
+	
 	inline void addObject(GameObject* object) {
 		m_objects.push_back(object);
 		this->sortObjects();

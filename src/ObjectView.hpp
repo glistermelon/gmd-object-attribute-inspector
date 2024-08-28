@@ -26,4 +26,7 @@ public:
 		return m_window;
 	}
 
+	void zoomInCallback(CCObject*);
+	void zoomOutCallback(CCObject*);
+
 };

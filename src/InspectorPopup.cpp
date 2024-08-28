@@ -3,6 +3,8 @@
 #include "AttributeListing.hpp"
 #include "ObjectSelection.hpp"
 #include "ObjectView.hpp"
+#include "NodeExitTracker.hpp"
+#include "AttributeEditor.hpp"
 
 InspectorPopup* InspectorPopup::activePopup;
 
@@ -11,8 +13,6 @@ CCLabelBMFont* getObjectInfoLabel() {
 }
 
 bool InspectorPopup::setup(ObjectSelection* objSelection, LevelEditorLayer* editorLayer) {
-
-    InspectorPopup::activePopup = this;
 
     m_editorLayer = editorLayer;
     m_objSelection.reset(objSelection);
@@ -150,6 +150,8 @@ InspectorPopup* InspectorPopup::create(ObjectSelection* objects, LevelEditorLaye
     CCSize size = CCDirector::sharedDirector()->getWinSize() - CCSize(PADDING_HORIZONTAL, PADDING_VERTICAL);
     if (popup->initAnchored(size.width, size.height, objects, editorLayer)) {
         popup->autorelease();
+        activePopup = popup;
+        NodeExitTracker::addNode(popup, []() { activePopup = nullptr; });
         return popup;
     }
     delete popup;
@@ -158,20 +160,17 @@ InspectorPopup* InspectorPopup::create(ObjectSelection* objects, LevelEditorLaye
 
 void InspectorPopup::setObject(GameObject* object) {
 
-    AttributeViewMode viewMode;
+    if (object) m_object.reset(new GameObjectWrapper(object));
+    else object = m_object->getGameObject();
 
-    if (m_object && m_object->getGameObject() == object) return;
+    if (!m_attrView) { // first update
 
-    bool firstUpdate = !m_attrView;
-
-    m_attrView = CCNode::create();
-    m_attrView->setContentSize(CCSize(ATTR_LISTING_SIZE.width, 235.f));
-    m_attrView->setPosition(ccp(215.f, 40.f));
-    m_attrView->setAnchorPoint(ccp(0.f, 0.f));
-    m_attrView->setZOrder(1);
-    this->addChild(m_attrView);
-
-    if (firstUpdate) {
+        m_attrView = CCNode::create();
+        m_attrView->setContentSize(CCSize(ATTR_LISTING_SIZE.width, 235.f));
+        m_attrView->setPosition(ccp(215.f, 40.f));
+        m_attrView->setAnchorPoint(ccp(0.f, 0.f));
+        m_attrView->setZOrder(1);
+        this->addChild(m_attrView);
 
         auto listBorder = Border::create(nullptr, { 0, 0, 0, 0 }, m_attrView->getContentSize());
         listBorder->setPosition(m_attrView->getPosition());
@@ -189,33 +188,25 @@ void InspectorPopup::setObject(GameObject* object) {
 
     }
 
-    m_object.reset(new GameObjectWrapper(object));
-
     /* normal view */
 
-    if (m_attrList) this->removeChild(m_attrList);
+    if (m_attrList) m_attrView->removeChild(m_attrList);
 
     CCArray* listItems = CCArray::create();
     for (auto [key, value] : m_object->getAttributes())
         listItems->addObject(AttributeListing::create(m_object.get(), key));
 
-    bool evenIndex = true;
-    for (auto listItem : CCArrayExt<AttributeListing*>(listItems)) {
-        listItem->updateColors(evenIndex);
-        evenIndex = !evenIndex;
-    }
-
-    m_attrList = ListView::create(listItems, ATTR_LISTING_SIZE.height, m_attrView->getContentWidth(), m_attrView->getContentHeight());
+    m_attrList = DynamicListView::create(listItems, ATTR_LISTING_SIZE.height, m_attrView->getContentWidth(), m_attrView->getContentHeight());
     m_attrList->setPosition(ccp(0.f, 0.f));
     m_attrList->setAnchorPoint(ccp(0.f, 0.f));
     m_attrList->setZOrder(1);
-    m_attrList->setPrimaryCellColor(LIGHTER_BROWN_3B);
-    m_attrList->setSecondaryCellColor(LIGHT_BROWN_3B);
+    m_attrList->getListView()->setPrimaryCellColor(LIGHTER_BROWN_3B);
+    m_attrList->getListView()->setSecondaryCellColor(LIGHT_BROWN_3B);
     m_attrView->addChild(m_attrList);
 
     /* json view */
 
-    if (m_jsonView) this->removeChild(m_jsonView);
+    if (m_jsonView) m_attrView->removeChild(m_jsonView);
 
     m_jsonView = JsonTextArea::create(m_object->getJson(), m_attrView->getContentSize());
     m_jsonView->setBgLayer(m_attrViewBg);
@@ -226,6 +217,7 @@ void InspectorPopup::setObject(GameObject* object) {
 
     /* raw view */
 
+    if (m_rawView) m_attrView->removeChild(m_rawView);
     m_rawView = MDTextArea::create("", m_attrView->getContentSize());
     m_rawView->setPosition(ccp(7.5f, 0.f));
     m_rawView->setAnchorPoint(ccp(0.f, 0.f));
@@ -257,7 +249,6 @@ void InspectorPopup::updateAttrViewVisibility() {
             else ss << c;
         }
         std::string stdStr = ss.str();
-        std::cout << "HEYYYY: '" << stdStr << "'" << std::endl;
         m_rawView->setString(stdStr.c_str());
     }
     m_attrViewBg->setVisible(!m_rawView->isVisible());
@@ -269,4 +260,27 @@ void InspectorPopup::updateAttrViewVisibility() {
 void InspectorPopup::onExit() {
     geode::Popup<ObjectSelection*, LevelEditorLayer*>::onExit();
     getObjectInfoLabel()->setVisible(m_objectInfoLabelVisibility);
+}
+
+void InspectorPopup::onAddAttribute(CCObject*) {
+    int key;
+    bool badKey = false;
+    auto idStr = m_newAttrIDInput->getString();
+    try {
+        key = std::stoi(idStr);
+    }
+    catch (std::invalid_argument) {
+        badKey = true;
+    }
+    catch (std::out_of_range) {
+        badKey = true;
+    }
+    if (badKey) {
+        FLAlertLayer::create(
+            "Invalid Attribute Key",
+            decltype(idStr)("'") + idStr + "' is not a valid key for a new attribute.",
+            "OK"
+        )->show();
+    }
+    AttributeEditor::create(m_object.get(), key)->show();
 }

@@ -4,6 +4,7 @@
 #include "ObjectSelection.hpp"
 #include "GameObjectWrapper.hpp"
 #include "JsonTextArea.hpp"
+#include "DynamicListView.hpp"
 
 enum AttributeViewMode {
 	INFO_VIEW,
@@ -23,7 +24,7 @@ class InspectorPopup : public geode::Popup<ObjectSelection*, LevelEditorLayer*> 
 
 	CCNode* m_attrView;
 	CCLayerColor* m_attrViewBg;
-	ListView* m_attrList = nullptr;
+	DynamicListView* m_attrList = nullptr;
 	JsonTextArea* m_jsonView = nullptr;
 	MDTextArea* m_rawView = nullptr;
 
@@ -33,6 +34,8 @@ class InspectorPopup : public geode::Popup<ObjectSelection*, LevelEditorLayer*> 
 	CCMenuItemToggler* m_infoViewBtn;
 
 	bool m_objectInfoLabelVisibility;
+
+	CCTextInputNode* m_newAttrIDInput;
 
 	static InspectorPopup* activePopup;
 
@@ -46,10 +49,13 @@ public:
 
 	inline static InspectorPopup* get() { return activePopup; }
 
+	// set object to nullptr to reload same object
 	void setObject(GameObject* object);
 
 	void updateAttrViewVisibility();
 
 	void onExit() override;
+
+	void onAddAttribute(CCObject*);
 
 };

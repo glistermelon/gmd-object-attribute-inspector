@@ -2,6 +2,8 @@
 
 #include "AttributeEditor.hpp"
 #include "AttributeDocs.hpp"
+#include "NodeExitTracker.hpp"
+#include "InspectorPopup.hpp"
 
 const CCSize ATTR_LISTING_SIZE = CCSize(300.f, 60.f);
 
@@ -72,7 +74,7 @@ bool AttributeListing::init(GameObjectWrapper* object, int attrKey) {
     auto editSprite = EditorButtonSprite::createWithSprite("pencil.png"_spr, 0.8f, EditorBaseColor::BrightGreen);
     trashSprite->setScale(0.7f);
     editSprite->setScale(0.7f);
-    auto trash = CCMenuItemSpriteExtra::create(trashSprite, this, nullptr);
+    auto trash = CCMenuItemSpriteExtra::create(trashSprite, this, menu_selector(AttributeListing::deleteCallback));
     auto edit = CCMenuItemSpriteExtra::create(editSprite, this, menu_selector(AttributeListing::editCallback));
     buttons->addChild(trash);
     buttons->addChild(edit);
@@ -142,5 +144,15 @@ AttributeListing* AttributeListing::create(GameObjectWrapper* object, int attrKe
 }
 
 void AttributeListing::editCallback(CCObject*) {
-    AttributeEditor::create(m_object, m_attrKey)->show();
+    auto editor = AttributeEditor::create(m_object, m_attrKey);
+    NodeExitTracker::addNode(editor, [this]() {
+        // regenerate attribute list
+        InspectorPopup::get()->setObject(nullptr);
+    });
+    editor->show();
+}
+
+void AttributeListing::deleteCallback(CCObject*) {
+    m_object->removeAttribute(m_attrKey);
+    m_object->commitWithGUI(m_attrKey);
 }

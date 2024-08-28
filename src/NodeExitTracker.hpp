@@ -4,7 +4,7 @@
 
 class NodeExitTracker {
 
-	static std::map<uintptr_t, std::function<void()>> exitFunctions;
+	static std::map<uintptr_t, std::vector<std::function<void()>>> exitFunctions;
 
 public:
 

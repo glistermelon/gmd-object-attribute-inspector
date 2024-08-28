@@ -2,9 +2,6 @@
 
 #include "attr.hpp"
 
-#include <string>
-#include <map>
-
 class AttributeDocs {
 
 	friend struct matjson::Serialize<AttributeDocs>;

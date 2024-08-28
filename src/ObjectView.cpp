@@ -45,40 +45,32 @@ bool ObjectView::init(float size, ObjectSelection* selection, LevelEditorLayer* 
     buttons->addChild(arrowNext);
 
     auto zoomOutSprite = CCSprite::createWithSpriteFrameName("GJ_zoomOutBtn_001.png");
-    auto zoomOut = CCMenuItemSpriteExtra::create(zoomOutSprite, nullptr, nullptr);
+    auto zoomOut = CCMenuItemSpriteExtra::create(zoomOutSprite, this, menu_selector(ObjectView::zoomOutCallback));
     buttons->addChild(zoomOut);
 
     auto zoomInSprite = CCSprite::createWithSpriteFrameName("GJ_zoomInBtn_001.png");
-    auto zoomIn = CCMenuItemSpriteExtra::create(zoomInSprite, nullptr, nullptr);
+    auto zoomIn = CCMenuItemSpriteExtra::create(zoomInSprite, this, menu_selector(ObjectView::zoomInCallback));
     buttons->addChild(zoomIn);
-
-    auto focusSprite = CircleButtonSprite::createWithSprite("focus.png"_spr, 0.85f);
-    auto focus = CCMenuItemSpriteExtra::create(focusSprite, nullptr, nullptr);
-    buttons->addChild(focus);
 
     arrowPrevSprite->setScale(buttonWidth / arrowPrev->getContentWidth());
     arrowNextSprite->setScale(buttonWidth / arrowNext->getContentWidth());
     zoomOutSprite->setScale(buttonWidth / zoomOut->getContentWidth());
     zoomInSprite->setScale(buttonWidth / zoomIn->getContentWidth());
-    focusSprite->setScale(buttonWidth / focus->getContentWidth());
 
     arrowPrev->setContentSize(arrowPrevSprite->getScaledContentSize());
     arrowNext->setContentSize(arrowNextSprite->getScaledContentSize());
     zoomOut->setContentSize(zoomOutSprite->getScaledContentSize());
     zoomIn->setContentSize(zoomInSprite->getScaledContentSize());
-    focus->setContentSize(focusSprite->getScaledContentSize());
 
     arrowPrevSprite->setPosition(ccp(0.f, 0.f));
     arrowNextSprite->setPosition(ccp(0.f, 0.f));
     zoomOutSprite->setPosition(ccp(0.f, 0.f));
     zoomInSprite->setPosition(ccp(0.f, 0.f));
-    focusSprite->setPosition(ccp(0.f, 0.f));
 
     arrowPrevSprite->setAnchorPoint(ccp(0.f, 0.f));
     arrowNextSprite->setAnchorPoint(ccp(1.f, 0.f));
     zoomOutSprite->setAnchorPoint(ccp(0.f, 0.f));
     zoomInSprite->setAnchorPoint(ccp(0.f, 0.f));
-    focusSprite->setAnchorPoint(ccp(0.f, 0.f));
     
     arrowNextSprite->setScaleY(-arrowNextSprite->getScaleY());
     arrowNextSprite->setRotation(180.f);
@@ -150,4 +142,14 @@ void ObjectView::focusObject() {
     ));
     objLayer->setPosition(objLayer->getPosition() - objPos + moveTo);
 
+}
+
+void ObjectView::zoomInCallback(CCObject* sender) {
+    LevelEditorLayer::get()->m_editorUI->zoomIn(sender);
+    this->focusObject();
+}
+
+void ObjectView::zoomOutCallback(CCObject* sender) {
+    LevelEditorLayer::get()->m_editorUI->zoomOut(sender);
+    this->focusObject();
 }

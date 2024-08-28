@@ -4,14 +4,14 @@
 
 void NodeExitTracker::addNode(CCNode* node, std::function<void()> fn) {
     auto ptr = reinterpret_cast<uintptr_t>(node);
-    exitFunctions[ptr] = fn;
+    exitFunctions[ptr].push_back(fn);
 }
 
 void NodeExitTracker::removeNode(CCNode* node) {
     auto ptr = reinterpret_cast<uintptr_t>(node);
     auto it = exitFunctions.find(ptr);
     if (it != exitFunctions.end()) {
-        it->second();
+        for (auto fn : it->second) fn();
         exitFunctions.erase(it);
     }
 }

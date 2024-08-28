@@ -49,11 +49,10 @@ class $modify(LevelEditorLayer) {
 
 	struct Fields {
 		bool m_noObjectsAlertOpen = false;
-		bool m_inspectorOpen = false;
 	};
 
 	void show_object_attrs() {
-		if (!m_editorUI || m_fields->m_noObjectsAlertOpen || m_fields->m_inspectorOpen) return;
+		if (!m_editorUI || m_fields->m_noObjectsAlertOpen) return;
 		CCArrayExt<GameObject*> objects = m_editorUI->getSelectedObjects();
 		if (objects.size() == 0) {
 			auto alert = FLAlertLayer::create(
@@ -71,10 +70,8 @@ class $modify(LevelEditorLayer) {
 		auto objSelection = new ObjectSelection;
 		objSelection->addObjects(objectVec.begin(), objectVec.end());
 		auto* popup = InspectorPopup::create(objSelection, this);
-		if (!popup) return;
+		if (!popup) return; // cleanup the other stuff too man
 		popup->show();
-		m_fields->m_inspectorOpen = true;
-		NodeExitTracker::addNode(popup, [this]() { m_fields->m_inspectorOpen = false; });
 	}
 
 	bool init(GJGameLevel* p0, bool p1) {
@@ -102,26 +99,28 @@ class $modify(LevelEditorLayer) {
 
 };
 
+#include <Geode/modify/EditorUI.hpp>
+class $modify(EditorUI) {
+	void keyDown(enumKeyCodes key) {
+		if (!InspectorPopup::get()) EditorUI::keyDown(key);
+	}
+};
+
 /*
 
 	TODO FOR 1.0
-	* add functionality to zoom in, zoom out, focus buttons
-		* allow dragging the object view with cursor
-			* do NOT allow selecting new objects or doing any editor stuff while doing so
-	* prevent keypresses from going to editor while in popup
-		* for example enter key shouldnt start playtesting
-		* deleting or moving objects with the popup open is also a no-no for now
-	* make the delete button on attribute listings work
-	* add a button/system for adding new attributes to an object
+	* [DONE] make the delete button on attribute listings work
+	* [PARTIAL] add a button/system for adding new attributes to an object
 	* warning if type decided in GameObjectWrapper constructor doesn't match the docs
-	* currently, when you commit an attribute edit, you have to reopen the popup for the new value to appear in listing. fix that
-	* fix the weird bug where every time you switch between objects you have selected it adds another attribute view node (the node that has the 3 view node type things inside it)
+	* [DONE] currently, when you commit an attribute edit, you have to reopen the popup for the new value to appear in listing. fix that
+	* [DONE] fix the weird bug where every time you switch between objects you have selected it adds another attribute view node (the node that has the 3 view node type things inside it)
 	* add functionality to the "enable type handling" button
 		* basically just disable 90% of the features when it isnt checked
 			* dont show types in listing
 			* editor should always just use raw text input, and shouldnt show the type-switcher-thing
 			* json values in json view should always just be the raw strings
 	* refactoring, cleanup, check style guidelines
+		* init functions should also call superclass init (CCNode::init too!)
 		* move any sizable functions out of headers (looking at GameObjectWrapper here)
 		* decide: should tiny functions (currently marked inline and left in headers) stay in headers? dunno yet, but probably not
 		* most of the code in main.cpp needs to be shilled out to the cpp for the class it deals with

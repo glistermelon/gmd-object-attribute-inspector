@@ -3,9 +3,6 @@
 #include "include.hpp"
 #include "attr.hpp"
 
-#include <sstream>
-#include <ios>
-
 struct ColorHSV {
 
 	float h;
