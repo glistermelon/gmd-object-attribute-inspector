@@ -2,10 +2,11 @@
 
 #include "AttributeEditor.hpp"
 #include "AttributeDocs.hpp"
-#include "NodeExitTracker.hpp"
 #include "InspectorPopup.hpp"
 
-const CCSize ATTR_LISTING_SIZE = CCSize(300.f, 60.f);
+const CCSize LISTING_SIZE = CCSize(300.f, 60.f);
+
+inline AttributeListing::AttributeListing() : GenericListCell("", LISTING_SIZE) {}
 
 bool AttributeListing::init(GameObjectWrapper* object, int attrKey) {
 
@@ -13,7 +14,7 @@ bool AttributeListing::init(GameObjectWrapper* object, int attrKey) {
     m_attrKey = attrKey;
     auto attr = object->getAttribute(attrKey).value();;
 
-    m_mainLayer->setContentSize(ATTR_LISTING_SIZE);
+    m_mainLayer->setContentSize(LISTING_SIZE);
 
     auto menu = CCMenu::create();
     menu->setAnchorPoint(ccp(0.f, 0.f));
@@ -25,7 +26,7 @@ bool AttributeListing::init(GameObjectWrapper* object, int attrKey) {
     std::string valueStr = attr.getValueLabel();
 
     auto keyLabel = CCLabelBMFont::create(keyStr.c_str(), "chatFont.fnt");
-    auto valueLabel = CCLabelBMFont::create(valueStr.c_str(), "chatFont.fnt");
+    auto valueLabel = CCLabelBMFont::create(valueStr.c_str(), "chatFont.fnt");;
 
     auto keyTextLabel = CCLabelBMFont::create("Key:", "chatFont.fnt");
     keyTextLabel->setScale(0.7f);
@@ -53,8 +54,8 @@ bool AttributeListing::init(GameObjectWrapper* object, int attrKey) {
 
     keyLabel->setScale(1 / 0.6f);
     valueLabel->setScale(1 / 0.6f);
-    keyLabel->setPosition(ccp(keyBox->getContentWidth() / 2, keyBox->getContentHeight() / 2));
-    valueLabel->setPosition(ccp(valueBox->getContentWidth() / 2, valueBox->getContentHeight() / 2));
+    keyLabel->setPosition(keyBox->getContentSize() / 2);
+    valueLabel->setPosition(valueBox->getContentSize() / 2);
 
     keyBox->addChild(keyLabel);
     valueBox->addChild(valueLabel);
@@ -91,7 +92,7 @@ bool AttributeListing::init(GameObjectWrapper* object, int attrKey) {
 
     auto docs = AttributeDocs::getDocs(attrKey);
 
-    std::string nameStr = docs ? docs->getName() : "Unknown Attribute";
+    std::string nameStr = docs ? docs->m_name : "Unknown Attribute";
     auto name = CCLabelBMFont::create(nameStr.c_str(), "bigFont.fnt");
     name->setAnchorPoint(ccp(0.f, 0.f));
     name->setPosition(ccp(5.f, 31.f));
@@ -104,7 +105,7 @@ bool AttributeListing::init(GameObjectWrapper* object, int attrKey) {
     if (docs) {
         infoStream << "Name: " << nameStr << "\n";
         infoStream << "Type: " << attrtype::getTypeLabel(type) << "\n";
-        infoStream << docs->getDescription();
+        infoStream << docs->m_description;
     }
     std::string infoStr = infoStream.str();
     auto info = InfoAlertButton::create("Attribute Documentation", infoStr.c_str(), 1.f);
@@ -144,15 +145,10 @@ AttributeListing* AttributeListing::create(GameObjectWrapper* object, int attrKe
 }
 
 void AttributeListing::editCallback(CCObject*) {
-    auto editor = AttributeEditor::create(m_object, m_attrKey);
-    NodeExitTracker::addNode(editor, [this]() {
-        // regenerate attribute list
-        InspectorPopup::get()->setObject(nullptr);
-    });
-    editor->show();
+    AttributeEditor::create(m_object, m_attrKey)->show();
 }
 
 void AttributeListing::deleteCallback(CCObject*) {
     m_object->removeAttribute(m_attrKey);
-    m_object->commitWithGUI(m_attrKey);
+    m_object->tryCommit(m_attrKey);
 }

@@ -5,9 +5,6 @@
 
 #include "InspectorPopup.hpp"
 #include "AttributeDocs.hpp"
-#include "NodeExitTracker.hpp"
-
-#include <algorithm>
 
 $execute {
 	
@@ -18,9 +15,6 @@ $execute {
 		{ keybinds::Keybind::create(KEY_F12, keybinds::Modifier::Alt) },
 		"Object Attribute Viewer/GUI"
 	});
-
-	// ByteVector v(5, 0x90);
-	// Mod::get()->patch((void*)(geode::base::get() + 0x38a0a7), v).unwrap();
 
 }
 
@@ -55,21 +49,17 @@ class $modify(LevelEditorLayer) {
 		if (!m_editorUI || m_fields->m_noObjectsAlertOpen) return;
 		CCArrayExt<GameObject*> objects = m_editorUI->getSelectedObjects();
 		if (objects.size() == 0) {
-			auto alert = FLAlertLayer::create(
+			createQuickPopup(
 				"No Objects Selected!",
 				"You need to select something to use the attribute inspector.",
-				"OK"
-			);
-			alert->show();
+				"OK", nullptr,
+				[this](auto, bool) { m_fields->m_noObjectsAlertOpen = false; }
+			)->show();
 			m_fields->m_noObjectsAlertOpen = true;
-			NodeExitTracker::addNode(alert, [this]() { m_fields->m_noObjectsAlertOpen = false; });
-			return;
+
 		}
-		std::vector<GameObject*> objectVec;
-		for (auto* obj : objects) objectVec.push_back(obj);
-		auto objSelection = new ObjectSelection;
-		objSelection->addObjects(objectVec.begin(), objectVec.end());
-		auto* popup = InspectorPopup::create(objSelection, this);
+
+		auto* popup = InspectorPopup::create();
 		if (!popup) return; // cleanup the other stuff too man
 		popup->show();
 	}

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "include.hpp"
-#include "attr.hpp"
+#include "attributes.hpp"
 
 struct ColorHSV {
 

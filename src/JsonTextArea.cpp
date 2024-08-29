@@ -56,6 +56,7 @@ std::string JsonTextArea::dumpJsonMarkdown(matjson::Value json, int indentLevel)
 }
 
 void JsonTextArea::updateColorHex(ccColor3B color) {
+
     std::stringstream bgColorHex;
     unsigned int rgb[] = { color.r, color.g, color.b };
     for (int i = 0; i < 3; ++i) {
@@ -66,6 +67,7 @@ void JsonTextArea::updateColorHex(ccColor3B color) {
         bgColorHex << s;
     }
     m_bgColorHex = bgColorHex.str();
+
 }
 
 bool JsonTextArea::init(matjson::Value json, CCSize size) {
@@ -74,17 +76,18 @@ bool JsonTextArea::init(matjson::Value json, CCSize size) {
 
     MDTextArea::m_bgSprite->setOpacity(0);
 
-    const char* fontLocal = "bigFont.fnt";
-    const char* font = new char[std::strlen(fontLocal)];
-    std::strcpy((char*)font, fontLocal);
-    MDTextArea::m_renderer->pushBMFont(font);
-
     m_json = json;
+
     this->updateColorHex(MDTextArea::m_bgSprite->getColor());
     this->updateText();
 
     return true;
 
+}
+
+void JsonTextArea::updateText() {
+    std::string s = dumpJsonMarkdown(m_json);
+    this->setString(s.c_str());
 }
 
 JsonTextArea* JsonTextArea::create(matjson::Value json, CCSize size) {
@@ -104,7 +107,6 @@ inline void JsonTextArea::setJson(matjson::Value json) {
 
 void JsonTextArea::setBgColor(ccColor3B color) {
     m_bgColor = color;
-    if (!m_bgLayer) return;
     m_bgLayer->setColor(color);
     this->updateColorHex(color);
     this->updateText();
@@ -114,7 +116,6 @@ void JsonTextArea::updateBgColor() {
     m_bgLayer->setColor(m_bgColor);
 }
 
-void JsonTextArea::updateText() {
-    std::string s = dumpJsonMarkdown(m_json);
-    this->setString(s.c_str());
+void JsonTextArea::setBgLayer(CCLayerColor* bgLayer) {
+    m_bgLayer = bgLayer;
 }

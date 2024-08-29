@@ -1,3 +1,3 @@
 #include "AttributeDocs.hpp"
 
-std::map<int, AttributeDocs> AttributeDocs::attributeDocs = {};
+decltype(AttributeDocs::attributeDocs) AttributeDocs::attributeDocs = {};

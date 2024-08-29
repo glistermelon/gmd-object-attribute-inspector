@@ -95,7 +95,7 @@ gd::string ValueContainer::getRaw() const {
             return m_strVal;
         case ATTR_TYPE_COLOR: {
             gd::string out;
-            //GameToolbox::stringFromHSV(out, m_colorVal.cchsv());
+            GameToolbox::stringFromHSV(out, m_colorVal.cchsv());
             return out;
         }
         case ATTR_TYPE_INT:

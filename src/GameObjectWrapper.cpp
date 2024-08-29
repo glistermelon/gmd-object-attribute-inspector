@@ -31,7 +31,7 @@ void GameObjectWrapper::setGameObject(GameObject* object) {
             auto key = std::stoi(keyStr);
             auto docs = AttributeDocs::getDocs(key);
             auto val = ValueContainer();
-            if (!val.setValue(valStr, true, docs ? docs->getType() : ATTR_TYPE_UNKNOWN))
+            if (!val.setValue(valStr, true, docs ? docs->m_type : ATTR_TYPE_UNKNOWN))
                 val.setUnknownValue(valStr);
             m_attributes[key] = val;
         }
@@ -96,6 +96,7 @@ bool GameObjectWrapper::tryUpdate(std::vector<int>& modified, std::vector<int>& 
 }
 
 void GameObjectWrapper::finishUpdate() {
+
     if (!m_updatedObject) {
         log::error("GameObjectWrapper::finishUpdate called without any updated object ready");
         return;
@@ -103,7 +104,7 @@ void GameObjectWrapper::finishUpdate() {
 
     deleteObject(m_object);
 
-    LevelEditorLayer::get()->m_editorUI->selectObject(m_updatedObject, false);
+    LevelEditorLayer::get()->m_editorUI->selectObject(m_updatedObject, true);
     this->setGameObject(m_updatedObject);
     m_updatedObject->setScale(m_updatedObjectScale);
     m_updatedObject = nullptr;
@@ -120,7 +121,7 @@ void GameObjectWrapper::cancelUpdate() {
     m_updatedObject = nullptr;
 }
 
-void GameObjectWrapper::commitWithGUI(int attrModified, std::function<void(bool)> callback) {
+void GameObjectWrapper::tryCommit(int attrModified, std::function<void(bool)> callback) {
 
     std::vector<int> modified;
     std::vector<int> deleted;
@@ -150,7 +151,7 @@ void GameObjectWrapper::commitWithGUI(int attrModified, std::function<void(bool)
             for (int attrKey : *changeVec) {
                 warnStream << attrKey;
                 auto docs = AttributeDocs::getDocs(attrKey);
-                warnStream << " (" << (docs ? docs->getName() : "Unknown Attribute") << ")\n";
+                warnStream << " (" << (docs ? docs->m_name : "Unknown Attribute") << ")\n";
             }
         }
     }

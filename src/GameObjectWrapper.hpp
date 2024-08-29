@@ -17,6 +17,11 @@ class GameObjectWrapper {
 
     void setGameObject(GameObject* object);
 
+    // returns true if attempted update just downright fails
+	bool tryUpdate(std::vector<int>& modified, std::vector<int>& deleted, std::vector<int>& added);
+    void finishUpdate(); // confirms changes from tryUpdate
+    void cancelUpdate(); // cancels changes from tryUpdate
+
 public:
 
     GameObjectWrapper(GameObject* object);
@@ -25,9 +30,9 @@ public:
 
     std::optional<ValueContainer> getAttribute(int key);
 
-    void setAttribute(int key, ValueContainer value);
-
     decltype(m_attributes) getAttributes();
+
+    void setAttribute(int key, ValueContainer value);
 
     void removeAttribute(int key);
 
@@ -35,18 +40,12 @@ public:
 
     gd::string getObjectString();
 
-    // returns true if attempted update just downright fails
-	bool tryUpdate(std::vector<int>& modified, std::vector<int>& deleted, std::vector<int>& added);
-
-    void finishUpdate();
-
-    void cancelUpdate();
-
-    // bool param to callback is whether or not the commit was carried out successfully
-    void commitWithGUI(int modifiedAttr, std::function<void(bool)> callback = [](bool){});
-
     matjson::Object getJson();
 
     gd::string getRaw();
+
+    // Semi-interactive (popups) function that orchestrates tryUpdate, finishUpdate, and cancelUpdate
+    // Bool param to callback is whether or not the commit was carried out successfully.
+    void tryCommit(int modifiedAttr, std::function<void(bool)> callback = [](bool) {});
 
 };

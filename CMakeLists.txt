@@ -8,7 +8,7 @@ project(ObjectAttributeViewer VERSION 1.0.0)
 
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp
-    src/attr.cpp
+    src/attributes.cpp
     src/AttributeDocs.cpp
     src/AttributeEditor.cpp
     src/AttributeListing.cpp
@@ -18,7 +18,6 @@ add_library(${PROJECT_NAME} SHARED
     src/ObjectView.cpp
     src/ValueContainer.cpp
     src/JsonTextArea.cpp
-    src/NodeExitTracker.cpp
     # Add any extra C++ source files here
 )
 

@@ -14,7 +14,7 @@ enum AttributeType {
 
 namespace attrtype {
 	
-	inline std::vector<AttributeType> getTypes() {
+	inline std::vector<AttributeType> getAllTypes() {
 		return {
 			ATTR_TYPE_INT,
 			ATTR_TYPE_FLOAT,
@@ -27,7 +27,7 @@ namespace attrtype {
 	}
 
 	template <class String>
-	inline std::vector<String> getTypeStrings() {
+	inline std::vector<String> getAllTypeStrings() {
 		return {
 			"Integer",
 			"Float",
@@ -45,6 +45,6 @@ namespace attrtype {
 	
 	ccColor3B getTypeLabelColor(AttributeType type);
 
-	AttributeType fromJsonString(std::string s);
+	AttributeType typeFromShortLabel(std::string s);
 
 }

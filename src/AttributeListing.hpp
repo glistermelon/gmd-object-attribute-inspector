@@ -1,39 +1,34 @@
 #pragma once
 
 #include "include.hpp"
-#include "attr.hpp"
+#include "attributes.hpp"
 #include "GameObjectWrapper.hpp"
-#include "DynamicListView.hpp"
 
-extern const CCSize ATTR_LISTING_SIZE;
+extern const CCSize LISTING_SIZE;
 
-class AttributeListing : public DynamicListItem {
+class AttributeListing : public GenericListCell {
 
 	GameObjectWrapper* m_object;
 	int m_attrKey;
 	
 	std::vector<CCScale9Sprite*> textBoxes;
 
-	inline AttributeListing() : DynamicListItem(ATTR_LISTING_SIZE) {}
-
-public:
-
-	void updateListItem(int index) override {
-		for (auto sprite : textBoxes) sprite->setColor(index % 2 == 0 ? LIGHT_BROWN_3B : LIGHTER_BROWN_3B);
-	}
-
-	bool listBefore(DynamicListItem* other) override {
-		auto listing = typeinfo_cast<AttributeListing*>(other);
-		return listing ? m_attrKey < listing->m_attrKey : false;
-	}
-
-private:
+	AttributeListing();
 
 	bool init(GameObjectWrapper* object, int attrKey);
 
 public:
 
 	static AttributeListing* create(GameObjectWrapper* object, int attrKey);
+
+	void updateColor(int index) {
+		for (auto sprite : textBoxes) sprite->setColor(index % 2 == 0 ? LIGHT_BROWN_3B : LIGHTER_BROWN_3B);
+		GenericListCell::m_backgroundLayer->setColor(index % 2 == 0 ? LIGHTER_BROWN_3B : LIGHT_BROWN_3B);
+	}
+
+	bool listBefore(AttributeListing* other) {
+		return m_attrKey < other->m_attrKey;
+	}
 
 	void editCallback(CCObject*);
 	void deleteCallback(CCObject*);

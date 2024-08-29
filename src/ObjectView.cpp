@@ -2,13 +2,14 @@
 
 #include "InspectorPopup.hpp"
 
-bool ObjectView::init(float size, ObjectSelection* selection, LevelEditorLayer* editorLayer) {
+bool ObjectView::init(ObjectSelection* selection, float size) {
 
     m_selection = selection;
-    m_editorLayer = editorLayer;
 
     this->setAnchorPoint(ccp(0.5f, 0.5f));
-    this->setContentWidth(200.f);
+    this->setContentWidth(200.f); // random large number because it uses a layout about the center anyway
+
+    // Add object viewing window
 
     m_window = Border::create(nullptr, ccColor4B{ 0, 0, 0, 0 }, CCSize(size, size));
     if (!m_window) return false;
@@ -16,15 +17,18 @@ bool ObjectView::init(float size, ObjectSelection* selection, LevelEditorLayer* 
     m_window->ignoreAnchorPointForPosition(false);
     this->addChild(m_window);
 
-    float buttonWidth = 15.f;
-    float gapWidth = 5.f;
-    float menuWidth = 2 * buttonWidth + gapWidth;
+    // Add control buttons to the side of the window
+
+    constexpr float buttonWidth = 15.f;
+    constexpr float gapWidth = 5.f;
+    constexpr float menuWidth = 2 * buttonWidth + gapWidth;
 
     auto buttons = CCMenu::create();
     buttons->setContentWidth(menuWidth);
     buttons->setContentHeight(m_window->getContentHeight());
+    this->addChild(buttons);
 
-    m_indexLabel = CCLabelBMFont::create("X", "chatFont.fnt");
+    m_indexLabel = CCLabelBMFont::create("X", "chatFont.fnt"); // IIRC, the string being empty caused problems so this is a placeholder value
     m_indexLabel->limitLabelWidth(menuWidth, 1.f, 0.1f);
 
     auto indexLabelContainer = CCNode::create();
@@ -37,48 +41,41 @@ bool ObjectView::init(float size, ObjectSelection* selection, LevelEditorLayer* 
     buttons->addChild(indexLabelContainer);
 
     auto arrowPrevSprite = CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png");
-    auto arrowPrev = CCMenuItemSpriteExtra::create(arrowPrevSprite, this, menu_selector(ObjectView::selectPrevOrNext));
+    auto arrowPrev = CCMenuItemSpriteExtra::create(arrowPrevSprite, this, menu_selector(InspectorPopup::selectPrevOrNext));
     buttons->addChild(arrowPrev);
 
     auto arrowNextSprite = CCSprite::createWithSpriteFrameName("GJ_arrow_02_001.png");
-    auto arrowNext = CCMenuItemSpriteExtra::create(arrowNextSprite, this, menu_selector(ObjectView::selectPrevOrNext));
+    auto arrowNext = CCMenuItemSpriteExtra::create(arrowNextSprite, this, menu_selector(InspectorPopup::selectPrevOrNext));
     buttons->addChild(arrowNext);
 
     auto zoomOutSprite = CCSprite::createWithSpriteFrameName("GJ_zoomOutBtn_001.png");
-    auto zoomOut = CCMenuItemSpriteExtra::create(zoomOutSprite, this, menu_selector(ObjectView::zoomOutCallback));
+    auto zoomOut = CCMenuItemSpriteExtra::create(zoomOutSprite, this, menu_selector(ObjectView::onZoomOut));
     buttons->addChild(zoomOut);
 
     auto zoomInSprite = CCSprite::createWithSpriteFrameName("GJ_zoomInBtn_001.png");
-    auto zoomIn = CCMenuItemSpriteExtra::create(zoomInSprite, this, menu_selector(ObjectView::zoomInCallback));
+    auto zoomIn = CCMenuItemSpriteExtra::create(zoomInSprite, this, menu_selector(ObjectView::onZoomIn));
     buttons->addChild(zoomIn);
 
-    arrowPrevSprite->setScale(buttonWidth / arrowPrev->getContentWidth());
-    arrowNextSprite->setScale(buttonWidth / arrowNext->getContentWidth());
-    zoomOutSprite->setScale(buttonWidth / zoomOut->getContentWidth());
-    zoomInSprite->setScale(buttonWidth / zoomIn->getContentWidth());
+    constexpr int numButtons = 4;
+    std::array<CCSprite*, numButtons> sprites = { arrowPrevSprite, arrowNextSprite, zoomOutSprite, zoomInSprite };
+    std::array<CCMenuItemSpriteExtra*, numButtons> buttonItems = { arrowPrev, arrowNext, zoomOut, zoomIn };
+    for (int i = 0; i < numButtons; ++i) {
+        sprites[i]->setScale(buttonWidth / buttonItems[i]->getContentWidth());
+        buttonItems[i]->setContentSize(sprites[i]->getScaledContentSize());
+        sprites[i]->setPosition(CCPointZero);
+        sprites[i]->setAnchorPoint(CCPointZero);
+    }
 
-    arrowPrev->setContentSize(arrowPrevSprite->getScaledContentSize());
-    arrowNext->setContentSize(arrowNextSprite->getScaledContentSize());
-    zoomOut->setContentSize(zoomOutSprite->getScaledContentSize());
-    zoomIn->setContentSize(zoomInSprite->getScaledContentSize());
-
-    arrowPrevSprite->setPosition(ccp(0.f, 0.f));
-    arrowNextSprite->setPosition(ccp(0.f, 0.f));
-    zoomOutSprite->setPosition(ccp(0.f, 0.f));
-    zoomInSprite->setPosition(ccp(0.f, 0.f));
-
-    arrowPrevSprite->setAnchorPoint(ccp(0.f, 0.f));
+    // Flip the "next" arrow around
     arrowNextSprite->setAnchorPoint(ccp(1.f, 0.f));
-    zoomOutSprite->setAnchorPoint(ccp(0.f, 0.f));
-    zoomInSprite->setAnchorPoint(ccp(0.f, 0.f));
-    
     arrowNextSprite->setScaleY(-arrowNextSprite->getScaleY());
     arrowNextSprite->setRotation(180.f);
 
+    // Tags for selection callback
     arrowPrev->setTag(0);
     arrowNext->setTag(1);
 
-    this->addChild(buttons);
+    // Set up the layout for the buttons
 
     auto layout = RowLayout::create();
     layout->setCrossAxisReverse(true);
@@ -92,11 +89,14 @@ bool ObjectView::init(float size, ObjectSelection* selection, LevelEditorLayer* 
     buttons->setLayout(layout);
     buttons->updateLayout();
 
+    // Set up the top-level layout
+
     layout = RowLayout::create();
     layout->setAutoScale(false);
     this->setLayout(layout);
     this->updateLayout();
 
+    // Initialize the index label
     this->updateIndexLabel();
 
     return true;
@@ -112,16 +112,9 @@ void ObjectView::updateIndexLabel() {
     m_indexLabel->setString(s.c_str());
 }
 
-void ObjectView::selectPrevOrNext(CCObject* obj) {
-    obj->getTag() ? m_selection->selectNext() : m_selection->selectPrev();
-    this->updateIndexLabel();
-    this->focusObject();
-    InspectorPopup::get()->setObject(m_selection->getSelectedObject());
-}
-
-ObjectView* ObjectView::create(float size, ObjectSelection* selection, LevelEditorLayer* editorLayer) {
+ObjectView* ObjectView::create(ObjectSelection* selection, float size) {
     auto* obj = new ObjectView();
-    if (obj->init(size, selection, editorLayer)) {
+    if (obj->init(selection, size)) {
         obj->autorelease();
         return obj;
     }
@@ -131,11 +124,12 @@ ObjectView* ObjectView::create(float size, ObjectSelection* selection, LevelEdit
 
 void ObjectView::focusObject() {
 
-    GameObject* object = m_selection->getSelectedObject();
-    CCLayer* objLayer = static_cast<GJBaseGameLayer*>(m_editorLayer)->m_objectLayer;
+    // TODO: use those util functions from include.hpp
+    GameObject* object = m_selection->getSelectedObject()->getGameObject();
+    CCLayer* objLayer = LevelEditorLayer::get()->m_objectLayer;
     CCNode* objLayerParent = objLayer->getParent();
     CCPoint objPos = objLayerParent->convertToNodeSpace(objLayer->convertToWorldSpace(object->getPosition()));
-    CCSize editLayerSize = m_editorLayer->getContentSize();
+    CCSize editLayerSize = LevelEditorLayer::get()->getContentSize();
     CCRect rect = m_window->boundingBox();
     CCPoint moveTo = objLayerParent->convertToNodeSpace(m_window->convertToWorldSpace(
         ccp(m_window->getContentWidth() / 2, m_window->getContentHeight() / 2)
@@ -144,12 +138,12 @@ void ObjectView::focusObject() {
 
 }
 
-void ObjectView::zoomInCallback(CCObject* sender) {
+void ObjectView::onZoomIn(CCObject* sender) {
     LevelEditorLayer::get()->m_editorUI->zoomIn(sender);
     this->focusObject();
 }
 
-void ObjectView::zoomOutCallback(CCObject* sender) {
+void ObjectView::onZoomOut(CCObject* sender) {
     LevelEditorLayer::get()->m_editorUI->zoomOut(sender);
     this->focusObject();
 }

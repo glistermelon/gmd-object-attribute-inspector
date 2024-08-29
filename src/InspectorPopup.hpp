@@ -2,9 +2,9 @@
 
 #include "include.hpp"
 #include "ObjectSelection.hpp"
+#include "ObjectView.hpp"
 #include "GameObjectWrapper.hpp"
 #include "JsonTextArea.hpp"
-#include "DynamicListView.hpp"
 
 enum AttributeViewMode {
 	INFO_VIEW,
@@ -13,20 +13,20 @@ enum AttributeViewMode {
 	NORMAL_VIEW // "Detailed"
 };
 
-class InspectorPopup : public geode::Popup<ObjectSelection*, LevelEditorLayer*> {
+class InspectorPopup : public geode::Popup<> {
 
-	std::unique_ptr<GameObjectWrapper> m_object = nullptr;
-	std::vector<CCMenuItemToggler*> viewButtons;
-	CCMenuItemToggler* typeButton;
-	CCMenuItemToggler* docsButton;
-	std::shared_ptr<ObjectSelection> m_objSelection; // todo: unique-ify
-	LevelEditorLayer* m_editorLayer; // todo: bye bye
+	ObjectSelection m_selection;
+
+	ObjectView* m_objectView;
 
 	CCNode* m_attrView;
 	CCLayerColor* m_attrViewBg;
-	DynamicListView* m_attrList = nullptr;
+	ListView* m_listView = nullptr;
 	JsonTextArea* m_jsonView = nullptr;
 	MDTextArea* m_rawView = nullptr;
+
+	CCMenuItemToggler* m_typeBtn;
+	CCMenuItemToggler* m_docsBtn;
 
 	CCMenuItemToggler* m_normalViewBtn;
 	CCMenuItemToggler* m_jsonViewBtn;
@@ -41,21 +41,22 @@ class InspectorPopup : public geode::Popup<ObjectSelection*, LevelEditorLayer*> 
 
 protected:
 
-	bool setup(ObjectSelection* objSelection, LevelEditorLayer* editorLayer) override;
+	bool setup() override;
 
 public:
 
-	static InspectorPopup* create(ObjectSelection* objects, LevelEditorLayer* editorLayer);
+	static InspectorPopup* create();
 
 	inline static InspectorPopup* get() { return activePopup; }
 
-	// set object to nullptr to reload same object
-	void setObject(GameObject* object);
+	void loadObject();
 
 	void updateAttrViewVisibility();
 
-	void onExit() override;
-
 	void onAddAttribute(CCObject*);
+
+	void selectPrevOrNext(CCObject* obj);
+
+	void onExit() override;
 
 };

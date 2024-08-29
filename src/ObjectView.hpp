@@ -8,25 +8,21 @@ class ObjectView : public CCNode {
 	ObjectSelection* m_selection;
 	geode::Border* m_window;
 	CCLabelBMFont* m_indexLabel;
-	LevelEditorLayer* m_editorLayer;
 
-	bool init(float size, ObjectSelection* selection, LevelEditorLayer* editorLayer);
-
-	void updateIndexLabel();
-
-	void selectPrevOrNext(CCObject* obj);
+	bool init(ObjectSelection* selection, float size);
 
 public:
 
-	static ObjectView* create(float size, ObjectSelection* selection, LevelEditorLayer* editorLayer);
+	static ObjectView* create(ObjectSelection* selection, float size);
+
+	// For the clipping node in InspectorPopup::setup
+	inline CCNode* getNodeToClipBehind() { return m_window; }
+
+	void updateIndexLabel();
 
 	void focusObject();
 
-	inline CCNode* getNodeToClipBehind() {
-		return m_window;
-	}
-
-	void zoomInCallback(CCObject*);
-	void zoomOutCallback(CCObject*);
+	void onZoomIn(CCObject*);
+	void onZoomOut(CCObject*);
 
 };

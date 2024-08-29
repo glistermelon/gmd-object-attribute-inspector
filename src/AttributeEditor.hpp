@@ -92,11 +92,11 @@ public:
 
     static HSVDisplay* create(ColorHSV hsv);
 
-    void updateHSV(ColorHSV hsv);
-
-    void buttonCallback(CCObject*);
-
     inline ColorHSV getColorValue() { return m_hsv; }
+
+    void updateDisplay(ColorHSV hsv);
+
+    void onClick(CCObject*);
 
 };
 
@@ -111,6 +111,7 @@ class AttributeEditor : public geode::Popup<GameObjectWrapper*, int> {
     CCMenu* m_inputArea;
 
     bool setup(GameObjectWrapper* object, int attrKey) override;
+    
     void updateInputArea();
 
 public:
@@ -125,7 +126,8 @@ public:
         )->show();
     }
 
-    void cancel(CCObject*);
-    void commit(CCObject*);
+    void onCancel(CCObject*);
+    void onCommit(CCObject*);
+    void onExit() override;
 
 };

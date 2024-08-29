@@ -1,4 +1,4 @@
-#include "attr.hpp"
+#include "attributes.hpp"
 
 #include <string>
 
@@ -59,13 +59,13 @@ ccColor3B attrtype::getTypeLabelColor(AttributeType type) {
     }
 }
 
-AttributeType attrtype::fromJsonString(std::string s) {
+AttributeType attrtype::typeFromShortLabel(std::string s) {
     if (s == "int") return ATTR_TYPE_INT;
     if (s == "float") return ATTR_TYPE_FLOAT;
     if (s == "bool") return ATTR_TYPE_BOOL;
     if (s == "array") return ATTR_TYPE_ARRAY;
     if (s == "color") return ATTR_TYPE_COLOR;
     if (s == "string") return ATTR_TYPE_STRING;
-    geode::log::warn("fromJsonString encountered unexpected type string: {0}", s);
+    log::warn("typeFromShortLabel encountered unexpected type string: {0}", s);
     return ATTR_TYPE_UNKNOWN;
 }

@@ -2,8 +2,6 @@
 
 #include "include.hpp"
 
-#include <matjson.hpp>
-
 class JsonTextArea : public MDTextArea {
 
     matjson::Value m_json;
@@ -18,18 +16,18 @@ class JsonTextArea : public MDTextArea {
 
     bool init(matjson::Value json, CCSize size);
 
+    void updateText();
+
 public:
 
     static JsonTextArea* create(matjson::Value json, CCSize size);
 
-    void setJson(matjson::Value json);
+    void setJson(matjson::Value);
 
-    void setBgColor(ccColor3B color);
+    void setBgColor(ccColor3B);
 
     void updateBgColor();
 
-    inline void setBgLayer(CCLayerColor* bgLayer) { m_bgLayer = bgLayer; }
-
-    void updateText();
+    void setBgLayer(CCLayerColor*);
 
 };
