@@ -68,3 +68,6 @@ resources-projects/
 
 # CMake?
 CMakeSettings.json
+
+# GIMP Project
+logo.xcf

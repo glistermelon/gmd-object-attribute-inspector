@@ -1,25 +1,17 @@
 cmake_minimum_required(VERSION 3.21)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(ObjectAttributeViewer VERSION 1.0.0)
+project(ObjectPropertyTool VERSION 1.0.0)
 
-add_library(${PROJECT_NAME} SHARED
-    src/main.cpp
-    src/attributes.cpp
-    src/AttributeDocs.cpp
-    src/AttributeEditor.cpp
-    src/AttributeListing.cpp
-    src/include.cpp
-    src/InspectorPopup.cpp
-    src/GameObjectWrapper.cpp
-    src/ObjectView.cpp
-    src/ValueContainer.cpp
-    src/JsonTextArea.cpp
-    # Add any extra C++ source files here
+file(GLOB_RECURSE SOURCES
+    "src/*.cpp"
+    "src/*.hpp"
 )
+
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 

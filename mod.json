@@ -1,26 +1,44 @@
 {
-	"geode": "3.4.0",
+	"geode": "5.6.1",
 	"gd": {
-		"win": "2.206",
-		"mac": "2.206"
+		"win": "2.2081"
 	},
-	"id": "glistermelon.object_attribute_viewer",
-	"name": "Object Attribute Viewer",
+	"id": "glistermelon.object_property_tool",
+	"name": "Object Property Tool",
 	"version": "v1.0.0",
 	"developer": "glistermelon",
-	"description": "View low-level attributes of objects (as in level save strings).",
-    "dependencies": [
-        {
-            "id": "geode.custom-keybinds",
-            "version": "v1.1.0"
-        }
-    ],
+	"description": "GUI for inspecting object property strings",
+	"links": {
+		"source": "https://github.com/glistermelon/gd-object-property-tool"
+	},
+	"tags": [
+		"offline",
+		"editor"
+	],
 	"resources": {
 		"sprites": [
 			"resources/*.png"
 		],
 		"files": [
 			"resources/docs.json"
-		]
+		],
+		"fonts": {
+			"UbuntuMono": {
+				"path": "resources/ubuntu-mono.ttf",
+				"size": 80
+			}
+		}
+	},
+	"settings": {
+		"keybinds-title": {
+			"type": "title",
+			"name": "Keybinds"
+		},
+		"open-object-inspector-keybind": {
+			"type": "keybind",
+			"name": "Open Object Inspector",
+			"default": "Alt+I",
+			"category": "editor"
+		}
 	}
 }
